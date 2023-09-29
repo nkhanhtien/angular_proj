@@ -1,0 +1,46 @@
+﻿<div [ngStyle]="control.style || {}">
+  <label [attr.for]="control.key"
+    >{{ control.label | translate }}
+    <span *ngIf="validator" style="color: red">*</span></label
+  >
+  <div>
+    <div>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="{{ control['placeholder'] | translate }}"
+        [formControl]="autoCompleteControl"
+        [(ngModel)]="textValue"
+        [type]="control['type']"
+        [readonly]="control['disabled']"
+        [matAutocomplete]="auto"
+        (blur)="blurEvent()"
+        [class.is-invalid]="formControl?.invalid && formControl?.touched"
+        [ngStyle]="{
+          width:
+            control.style && control.style.width ? control.style.width : null
+        }"
+      />
+    </div>
+    <mat-autocomplete
+      #auto="matAutocomplete"
+      (optionSelected)="selectedItem($event.option.value)"
+      [displayWith]="displayFn"
+    >
+      <mat-option
+        *ngFor="let item of filteredOptions | async"
+        [value]="item"
+        style="font-size: 12px; height: 25px"
+      >
+        {{ item["value"] | translate }}
+      </mat-option>
+    </mat-autocomplete>
+    <div
+      *ngIf="formErrors.errors"
+      class="errorBox"
+      style="position: relative; max-width: 230px"
+    >
+      <div *ngFor="let error of formErrors.errors">{{ error | translate }}</div>
+    </div>
+  </div>
+</div>

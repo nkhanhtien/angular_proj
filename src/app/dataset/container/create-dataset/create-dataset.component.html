@@ -1,0 +1,81 @@
+<app-ctr-loading-page *ngIf="loading"></app-ctr-loading-page>
+
+<div [hidden]="loading">
+    <h5 class="create-dataset-heading">{{ isEditMode ? 'Update dataset' : 'New dataset'}}</h5>
+
+    <app-formc-single
+        #CreateDatasetForm
+        [controls]="controls"
+        [ButtonList]="buttonList"
+        (OnFormActions)="actionButtonList($event)"
+    ></app-formc-single>
+
+    <mat-divider class="divider"></mat-divider>
+
+    <div *ngIf="isEditMode"class="element-section">
+        <div class="element-section__list">
+            <h6 class="element-section__list-heading">Dataset Elements</h6>
+            <button class="create-button" (click)="handleCreateButtonClick()">Create dataset element</button>
+            <div class="element-section__list-wrapper">
+                <mat-accordion multi>
+                    <mat-expansion-panel *ngFor="let item of controlTypes">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title class="control-type">
+                                <mat-icon>view_cozy</mat-icon>
+                                {{item.title}}
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <ng-container *ngIf="datasetElements && datasetElementsByControlType(item.value).length > 0; else noDatasetElement">
+                            <div class="item" *ngFor="let element of datasetElementsByControlType(item.value)" [class.active]="element._id === selectedDatasetElement?._id" (click)="setActiveItem(element)">
+                                {{ element.label }}
+                            </div>
+                        </ng-container>
+                        <ng-template #noDatasetElement>
+                            <div class="no-data-message">
+                                <span>No data</span>
+                            </div>
+                        </ng-template>
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </div>
+        </div>
+        <div class="element-section__details">
+            <h6 class="element-section__details-heading">{{isEditDatasetElement ? 'Dataset Details and Update' : 'Creat Dataset Element'}}</h6>
+            <app-formc-single
+                #CreateDatasetElementForm
+                [controls]="elementControls"
+                [ButtonList]="elementButtonList"
+                (OnFormActions)="actionButtonListDatasetElementForm($event)"
+                (change)="onFormControlOnChanges($event)"
+            ></app-formc-single>
+            <div *ngIf="controlValues.controls.length > 0">
+                <form [formGroup]="controlValuesForm">
+                    <div formArrayName="controlValues" class="control-values-wrapper">
+                        <span>Control values</span>
+                        <div *ngFor="let item of controlValues.controls; let i=index" [formGroupName]="i" class="control-values">
+                            <div *ngIf="item.value.label !== undefined" class="control-values__input">
+                                <input type="text" formControlName="label" class="form-control" placeholder="Label">
+                            </div>
+                            <div *ngIf="item.value.value !== undefined" class="control-values__input">
+                                <input type="text" formControlName="value" class="form-control" placeholder="Value">
+                            </div>
+                            <div *ngIf="item.value.id !== undefined" class="control-values__input">
+                                <input type="text" formControlName="id" class="form-control" placeholder="ID">
+                            </div>
+                            <ng-container *ngIf="i !== controlValues.controls.length - 1; else addControlBlock">
+                                <button [disabled]="isButtonDisabled" (click)="removeControlValue(i)" class="btn btn-danger">
+                                    <mat-icon>delete</mat-icon>
+                                </button>
+                            </ng-container>
+                            <ng-template #addControlBlock>
+                                <button [disabled]="isButtonDisabled" (click)="addControlValue()" class="btn btn-success">
+                                    <mat-icon>add</mat-icon>
+                                </button>
+                            </ng-template>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

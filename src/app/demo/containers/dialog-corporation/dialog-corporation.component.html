@@ -1,0 +1,28 @@
+<h2 mat-dialog-title>Search corporation</h2>
+<mat-dialog-content>
+  <app-formc-bar
+    #formBar
+    class="w-100 p-3"
+    [controls]="searchControls"
+    (OnSubmitSearch)="onSubmitSearchForm($event)"
+  ></app-formc-bar>
+  <app-formc-master
+    [GridDefinitions]="gridDefinitions"
+    [DataSource]="dataSource"
+    [PageInfo]="pageInfo"
+    [IsStaticSource]="true"
+    (OnChangeSelection)="onChangeSelection($event)"
+    [IsMultiSelect]="false"
+  ></app-formc-master>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onClose()">Cancel</button>
+  <button
+    mat-button
+    (click)="onSelect()"
+    [disabled]="!selectedItem"
+    cdkFocusInitial
+  >
+    Select
+  </button>
+</mat-dialog-actions>

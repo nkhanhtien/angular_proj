@@ -1,0 +1,34 @@
+<app-ctr-loading-page *ngIf="loading"></app-ctr-loading-page>
+<h1>Activities Design by Blockly</h1>
+<app-formc-single
+  #ActivityForm 
+  [controls]="controls"
+  [ButtonList]="buttonList"
+  (OnFormActions)="onFormActions($event)"
+  (OnFormControlStatusChanges)="onFormChanges($event)"
+></app-formc-single>
+<div id="blocklyDiv" style="height: 480px; width: 100%"></div>
+<!-- <div class="row my-3">
+  <div class="col-md-8">
+    <h2>Output</h2>
+    <pre id="code"></pre>
+  </div>
+  <div class="col-md">
+    <button
+      id="runButton"
+      type="button"
+      class="btn btn-success mr-2"
+      (click)="generateCode()"
+    >
+      Execute
+    </button>
+    <button
+      id="runButton"
+      type="button"
+      class="btn btn-success"
+      (click)="saveWorkspace()"
+    >
+      Save
+    </button>
+  </div>
+</div> -->

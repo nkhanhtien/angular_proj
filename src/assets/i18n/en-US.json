@@ -1,0 +1,124 @@
+{
+  "language": {
+    "languages": "Languages",
+    "en-US": "English",
+    "ja-JP": "日本人"
+  },
+  "auth": {
+    "login-form": {
+      "title": "Login to your account",
+      "email": "Email",
+      "password": "Password",
+      "login": "Login",
+      "forgot-password": "Forgot password?",
+      "donot-have-an-account": "Don't have an account?",
+      "register": "Register here",
+      "enter-your-email": "Enter your email",
+      "enter-your-password": "Enter your password"
+    },
+    "general": {
+      "logout": "Logout",
+      "user-profile": "User Profile",
+      "settings": "Settings"
+    },
+    "error": {
+      "incorrect-email-or-password": "Your email or password you entered is incorrect",
+      "login-failed": "Login failed",
+      "email-required": "Email is required",
+      "email-format": "Incorrect email format",
+      "password-required": "Password is required"
+    }
+  },
+  "dashboard": {
+    "dashboard-container": {
+      "test": "dashboard-container works!",
+      "dashboard": "Dashboard",
+      "demo-management": "Demo Management"
+    }
+  },
+  "demo": {
+    "demo1": "Demo 1",
+    "demo1.first-name": "First name",
+    "demo2": "Demo 2",
+    "demo3": "Demo 3",
+    "demo3-step2": "Policies",
+    "demo3-success": "Wizard Create Successfully!",
+    "demo3-create-other": "Create other",
+    "demo3-go-back": "Go back",
+    "dynamic-form-title": "Add Controls Dynamically To Form",
+    "search-title": "Search Form",
+    "user-name": "User Name"
+  },
+  "activity": {
+    "list": "Activities"
+  },
+  "dataset": {
+    "list": "Datasets",
+    "create": "New Dataset",
+    "detail": "Dataset Detail"
+  },
+  "tag":{
+    "tag-list": "Tag List"
+  },
+  "form-master": {
+    "no-data": "No Data",
+    "emptyformtext": "Please select another criteria/filter to display your results."
+  },
+  "validate-control": {
+    "validate-minlength": "Name must be at least 4 characters long",
+    "validate-maxlength": "Name cannot be more than 24 characters long",
+    "validate-email": "Email is required"
+  },
+  "paginator": {
+    "items_per_page": "Display",
+    "next_page": "Next page",
+    "previous_page": "Previous page",
+    "first_page": "First page",
+    "last_page": "Last page",
+    "of": "of"
+  },
+  "controls": {
+    "other-selected": "(and 1 other)",
+    "others-selected": "(and {{number}} others)"
+  },
+  "searching": "Searching...",
+  "search": "Search",
+  "reset": "Reset",
+  "searchMore": "Search More",
+  "select": "Select",
+  "confirmation": "Confirmation",
+  "confirm": "Confirm",
+  "move": "Move",
+  "name": "Name",
+  "email": "Email",
+  "action": "Action",
+  "view": "View",
+  "edit": "Edit",
+  "cancel": "Cancel",
+  "save": "Save",
+  "delete": "Delete",
+  "enable": "Enable",
+  "disable": "Disable",
+  "enabled": "Enabled",
+  "disabled": "Disabled",
+  "close": "Close",
+  "from": "From",
+  "to": "To",
+  "item-selected": "item selected",
+  "items-selected": "items selected",
+  "error": "Error",
+  "warning": "Warning",
+  "information": "Information",
+  "general": "General",
+  "show": "Show",
+  "hide": "Hide",
+  "next": "Next",
+  "previous": "Previous",
+  "finish": "Finish",
+  "back": "Back",
+  "submit": "Submit",
+  "renew": "Renew",
+  "change": "change",
+  "apply": "Apply",
+  "all": "All"
+}

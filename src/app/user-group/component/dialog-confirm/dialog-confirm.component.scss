@@ -1,0 +1,23 @@
+.dialog-confirm {
+
+    &__form {
+        display: flex;
+        flex-direction: column;
+        padding: 24px;
+        flex: 2;
+    }
+
+    &__message {
+        margin: 1.5rem;
+    }
+
+    .btn-group {
+        display: flex;
+        align-self: flex-end;
+        padding: 0 24px 5px !important;
+
+        button {
+            margin-left: 10px;
+        }
+    }
+}

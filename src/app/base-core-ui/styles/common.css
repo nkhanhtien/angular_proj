@@ -1,0 +1,293 @@
+﻿*,
+*:before,
+*:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: Poppins !important ;
+  background-color: #f5f6fa;
+}
+
+body:after {
+  font-family: "Material Icons";
+}
+
+input,
+button,
+select,
+textarea,
+optgroup,
+label,
+option,
+.form-control,
+.mat-expansion-panel-content,
+.mat-list-item,
+.mat-tab-label,
+.mat-tab-link {
+  font-family: Poppins !important;
+}
+
+input,
+button,
+select,
+textarea,
+optgroup,
+option
+{
+  height: 40px !important;
+}
+
+button:focus,
+.form-control:focus {
+  box-shadow: none !important;
+}
+.divLeftBody {
+  width: 0px;
+}
+
+.divCenterBody {
+  /*background-size: cover;*/
+  background-position: center center;
+  /*background-image: url('images/home/background.jpg');*/
+  background-image: url("images/home/logo2.svg");
+  background-repeat: no-repeat;
+  background-color: #baeded;
+}
+
+.divRightBody {
+  max-width: 350px;
+  max-height: 100%;
+  flex: 1;
+  /*For overlay parent div*/
+  position: absolute;
+  right: 0%;
+  overflow: auto;
+}
+
+.container {
+  padding: 0px;
+  margin: 0px;
+}
+
+.flexbox-parent {
+  width: 100%;
+  /*height: 100%;*/
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* align items in Main Axis */
+  align-items: stretch; /* align items in Cross Axis */
+  align-content: stretch; /* Extra space in Cross Axis */
+  /*min-height: 100%;*/
+  background-color: #041625; /*#041625;*/
+  color: #c0c5c9;
+  min-height: 100vh;
+  /*background: rgba(255, 255, 255, .1);*/
+}
+
+.flexbox-item {
+  /*padding: 10px;*/
+  flex: 1;
+}
+
+.flexbox-item-grow {
+  flex: 1; /* same as flex: 1 1 auto; */
+}
+
+.header {
+  background: rgba(255, 0, 0, 0.1);
+  min-height: 10vh;
+  background-color: #3f51b5;
+}
+.footer {
+  min-height: 5vh;
+}
+
+.flexbox-item.footer {
+  background: rgba(0, 255, 0, 0.1);
+  padding: 10px;
+}
+
+.fill-area {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start; /* align items in Main Axis */
+  align-items: stretch; /* align items in Cross Axis */
+  align-content: stretch; /* Extra space in Cross Axis */
+  min-height: 85vh;
+}
+
+.divHeaderContainer {
+  background-color: #3f51b5; /*#062038;#3f51b5;008080*/
+  color: lime; /*c1c7cd*/
+  height: 100%;
+  width: 100%;
+  display: flex; /* establish flex container */
+  flex-direction: row; /* default value; can be omitted */
+  flex-wrap: nowrap; /* default value; can be omitted */
+  justify-content: space-between; /* switched from default (flex-start, see below) */
+  padding: 10px;
+}
+
+.divHeaderLeft {
+  float: left;
+  height: 100%;
+  width: 20%;
+  align-items: center;
+  align-content: center;
+}
+
+.divHeaderCenter {
+  display: inline-block;
+  height: 100%;
+}
+
+.divHeaderRight {
+  float: right;
+  height: 100%;
+  align-items: center;
+  align-content: center;
+}
+
+.errorBox {
+  border: solid 0px white;
+  font-size: 14px;
+  padding: 5px;
+  margin: 0px;
+  color: red;
+}
+.panelHeader {
+  background-color: #eceef0;
+}
+
+.panelAccordion {
+  background-color: #eceef0;
+}
+
+.formContent {
+  background-color: #f5f6fa;
+  margin: 0px;
+  padding: 0px;
+}
+.mat-expansion-panel-header[aria-disabled="true"] {
+  padding-top: 10px;
+  height: 0px !important;
+}
+
+.form-inline label {
+  justify-content: flex-start;
+}
+
+.form-control {
+  border-radius: 5px;
+  font-size: 12px !important;
+  line-height: 18px !important;
+}
+
+.formTitle {
+  background-color: #0f85fe;
+  font-size: 25px;
+  margin: 0px;
+  padding: 10px;
+}
+
+.toolBarButton {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  background-color: #b4eeb4;
+}
+
+.mat-expansion-panel-body {
+  padding: 0 24px 5px !important;
+}
+
+.mat-expansion-panel-body label {
+  font-size: 12px !important;
+  line-height: 18px;
+  font-weight: bold;
+}
+
+.mat-expansion-panel-header h4 {
+  font-size: 20px !important;
+  font-weight: bold;
+}
+
+.mat-checkbox-layout {
+  margin-bottom: 0px !important;
+}
+
+control-selector {
+  width: 100%;
+}
+
+.cakecss {
+  width: 1000px;
+  height: 500px;
+}
+
+/*
+Remove this style, the button will have outline when you click on Grid columns and other mat-button
+*/
+button,
+btn {
+  font-size: 12px !important;
+  line-height: 18px;
+}
+
+button:focus {
+  outline: none !important;
+  outline: none !important;
+}
+
+.btn-action {
+  min-width: 100px;
+  font-weight: bold;
+}
+
+.textLayer span {
+  z-index: -1;
+}
+
+.pdfViewer.removePageBorders .page {
+  margin: 0px !important;
+  border: none;
+}
+
+.pdfViewer .page {
+  margin: 0px !important;
+}
+
+.ng2-pdf-viewer-container {
+  overflow-x: unset !important;
+  position: relative;
+  height: 100%;
+}
+
+.mat-menu-panel {
+  max-width: 350px !important;
+}
+
+body::-webkit-scrollbar {
+  width: 0.5em;
+  width: 0.5em;
+}
+body::-webkit-scrollbar-button {
+  width: 0.5em;
+  width: 0.5em;
+}
+body::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.3);
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
+}

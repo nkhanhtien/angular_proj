@@ -1,0 +1,19 @@
+<input type="hidden" [value]="searchItem.columnDef" />
+<div>
+  <mat-form-field>
+    <input
+      type="text"
+      matInput
+      placeholder="Input Search Value ..."
+      [(ngModel)]="searchItem.value"
+    />
+  </mat-form-field>
+</div>
+<div>
+  <button mat-button (click)="menuSeachAction({ action: 'close' })">
+    Cancel
+  </button>
+  <button mat-button (click)="menuSeachAction({ action: 'search' })">
+    Search
+  </button>
+</div>

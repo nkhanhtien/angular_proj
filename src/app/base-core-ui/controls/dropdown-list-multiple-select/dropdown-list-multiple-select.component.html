@@ -1,0 +1,84 @@
+﻿<style>
+  .additional-selection {
+    opacity: 0.9;
+    font-size: 0.9rem;
+  }
+
+  .custom-overlay-panel {
+    transform: translateX(-12px) translateY(28px) !important;
+  }
+
+  .mat-form-field {
+    font-size: medium;
+  }
+
+  .mat-form-field-infix {
+    border-top: 0px;
+    padding: 3px 0 !important;
+  }
+
+  .mat-form-field-underline {
+    display: none;
+  }
+
+  .mat-select-panel {
+    min-width: calc(100% + 24px) !important;
+  }
+</style>
+
+<div [ngStyle]="control.style">
+  <label
+    [attr.for]="control.key"
+    [ngStyle]="{ display: control.hideTextHeader === true ? 'None' : '' }"
+    >{{ control.label | translate }}
+    <span *ngIf="validator" style="color: red">*</span>
+  </label>
+  <div [class]="control.classCss">
+    <mat-form-field
+      class="form-control"
+      [class.is-invalid]="formControl?.invalid && formControl?.touched"
+      [floatLabel]="'auto'"
+    >
+      <mat-select
+        multiple
+        [disabled]="control.disabled"
+        #matSelect
+        (click)="beforeOpen()"
+        (selectionChange)="onSelectionChange()"
+        (blur)="onBlur()"
+        [(value)]="selected"
+        (openedChange)="openedChange($event)"
+        placeholder="{{ control['placeholder'] | translate }}"
+      >
+        <mat-select-trigger>
+          {{
+            matSelect.value?.length > 0
+              ? matSelect.value[0].text
+              : ("" | translate)
+          }}
+          <span
+            *ngIf="matSelect.value?.length > 1"
+            class="additional-selection"
+          >
+            {{
+              matSelect.value?.length === 2
+                ? ("controls.other-selected" | translate)
+                : ("controls.others-selected"
+                  | translate: { number: matSelect.value.length - 1 })
+            }}
+          </span>
+        </mat-select-trigger>
+        <mat-option *ngFor="let item of control['items']" [value]="item">
+          {{ item.text | translate }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div
+      *ngIf="formErrors.errors"
+      class="errorBox"
+      style="position: relative; max-width: 230px"
+    >
+      <div *ngFor="let error of formErrors.errors">{{ error | translate }}</div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+.create-user {
+    &__heading {
+        padding: 10px 0;
+        font-weight: 600;
+    }
+
+    &__wrapper {
+        display: flex;
+    }
+
+    &__avatar {
+        display: flex;
+        flex-direction: column;
+        padding: 0 24px;
+        align-items: center;
+        gap: 4px;
+
+        &-img {
+            border-radius: 50%;
+            border: solid 5px #ccc;
+        }
+
+        span {
+            font-weight: 600;
+        }
+    }
+
+    &__info {
+        flex: 3;
+    }
+}

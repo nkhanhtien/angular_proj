@@ -1,0 +1,108 @@
+.create-dataset-heading {
+    padding: 10px 0;
+    font-weight: 600;
+}
+
+.divider {
+    margin-top: 12px;
+}
+
+.element-section {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+
+    &__list {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        padding-top: 4px;
+        padding-right: 4px;
+
+        &-heading {
+            text-align: center;
+        }
+
+        .create-button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #4285f4;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            cursor: pointer;
+
+            &:hover {
+                background-color: #3367d6;
+            }
+        }
+
+        &-wrapper {
+            max-height: 350px;
+            overflow-y: auto;
+
+            .control-type {
+                font-weight: 600;
+                color: #444444;
+                gap: 4px;
+            }
+            
+            .item {
+                padding: 10px;
+                background-color: #f0f0f0;
+                border-radius: 5px;
+                margin-bottom: 5px;
+                cursor: pointer;
+                transition: background-color 0.3s;
+                margin-right: 4px;
+    
+                &:hover {
+                    background-color: #ccc;
+                }
+    
+                &.active {
+                    background-color: #00a0e9;
+                    color: #fff;
+                }
+            }
+
+            .no-data-message {
+                padding: 10px;
+                font-weight: bold;
+                text-align: center;
+                color: gray;
+            }
+        }
+    }
+
+    &__details {
+        flex: 3;
+        padding-top: 4px;
+        display: flex;
+        flex-direction: column;
+
+        &-heading {
+            text-align: center;
+        }
+
+        .control-values-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            padding: 4px 24px;
+        }
+
+        .control-values {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            gap: 12px;
+
+            &__input {
+                flex: 1
+            }
+        }
+    }
+}

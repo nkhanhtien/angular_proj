@@ -1,0 +1,110 @@
+﻿<style>
+  .form-row {
+    padding: 10px 10px 0px 10px;
+  }
+
+  .form-view-label {
+    color: #4f4f4f;
+    font-size: 12px !important;
+    line-height: 18px;
+  }
+
+  .form-view-value {
+    font-weight: bold;
+    margin-bottom: 0px;
+    font-size: 12px !important;
+    line-height: 18px;
+    word-break: break-word;
+  }
+
+  .vertical-group {
+    display: inline-flex;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+
+  .view-link {
+    padding-left: 5px;
+    cursor: pointer;
+  }
+</style>
+
+<div style="padding-bottom: 10px">
+  <div *ngFor="let control of controls" class="container-fluid">
+    <div
+      *ngIf="
+        control.controlType === ControlType.VerticalHorizontalList;
+        then verticalHorizontalControl;
+        else otherControl
+      "
+    ></div>
+    <ng-template #verticalHorizontalControl>
+      <div class="form-row">
+        <div class="{{ control.showVertical ? '' : 'vertical-group' }}">
+          <div
+            *ngFor="
+              let controlChild of control.children;
+              let controlIndex = index
+            "
+            class="{{ control.showVertical === false ? 'col' : '' }}"
+            [ngStyle]="{
+              padding: control.showVertical === true ? '5px' : '0px',
+              'margin-right':
+                control.showVertical === false &&
+                controlIndex <
+                  (control.children !== undefined
+                    ? control.children.length
+                    : 0) -
+                    1
+                  ? '15px'
+                  : '0px'
+            }"
+          >
+            <div [ngStyle]="controlChild.style" style="width: 100%">
+              <label class="form-view-label" [attr.for]="controlChild.key">{{
+                controlChild.label | translate
+              }}</label>
+              <div class="form-view-value">
+                {{ controlChild.value }}
+                {{
+                  controlChild.subfixTextView &&
+                  controlChild.subfixTextView !== ""
+                    ? " " + (controlChild.subfixTextView | translate)
+                    : ""
+                }}
+                <a
+                  *ngFor="let subLink of controlChild.subLinkUrl"
+                  class="view-link"
+                  (click)="subLinkClick(subLink)"
+                  >({{
+                    (subLink.linkLabel && subLink.linkLabel !== ""
+                      ? subLink.linkLabel
+                      : "view"
+                    ) | translate
+                  }})</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+    <ng-template #otherControl>
+      <div class="form-row">
+        <div style="width: 100%">
+          <label class="form-view-label" [attr.for]="control.key">{{
+            control.label | translate
+          }}</label>
+          <div class="form-view-value">
+            {{ control.value }}
+            {{
+              control.subfixTextView && control.subfixTextView !== ""
+                ? " " + (control.subfixTextView | translate)
+                : ""
+            }}
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+</div>

@@ -1,0 +1,28 @@
+﻿<app-ctr-tabs
+  [TabItems]="TabItems"
+  (OnTabChanges)="onTabChanges($event)"
+  [TabStyle]="TabHeaderStyle"
+>
+</app-ctr-tabs>
+
+<div *ngIf="IsAutoReloadTab; then AutoReloadTab; else NoAutoReloadTab"></div>
+
+<ng-template #AutoReloadTab>
+  <div style="margin-top: 1px">
+    <app-dynamic-component
+      [componentData]="CompDetailSection"
+    ></app-dynamic-component>
+  </div>
+</ng-template>
+
+<ng-template #NoAutoReloadTab>
+  <div
+    style="margin-top: 1px"
+    *ngFor="let tabItem of TabItems"
+    [hidden]="!tabItem.isDefault"
+  >
+    <app-dynamic-component
+      [componentData]="tabItem.componentSection"
+    ></app-dynamic-component>
+  </div>
+</ng-template>

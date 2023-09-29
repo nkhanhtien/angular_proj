@@ -1,0 +1,64 @@
+<div *ngIf="menuItem.link !== ''; then NoDropdown; else Dropdown"></div>
+
+<ng-template #NoDropdown>
+  <li [class]="getMenuItemClass()">
+    <a
+      routerLink="{{ '/' + menuItem.link }}"
+      [routerLinkActiveOptions]="{ exact: true }"
+      (click)="menuItemClick(menuItem)"
+      routerLinkActive="menu-item-active"
+      [class.menu-item-active]="isActive"
+    >
+      <img
+        *ngIf="menuItem.icon"
+        [src]="menuItem.icon"
+        style="padding: 10px; cursor: pointer"
+        class="menu-icon"
+        [class.icon-active]="isActive"
+      />
+      <img
+        *ngIf="!menuItem.icon"
+        style="padding: 15px; cursor: pointer"
+        [class.no-image-active]="isActive"
+      />
+      <span class="menu-item-text"
+        >{{ refixLabel }} {{ menuItem.name | translate }}</span
+      >
+    </a>
+  </li>
+</ng-template>
+
+<ng-template #Dropdown>
+  <li [class]="getMenuItemClass()" [class.active]="isDropDownActive">
+    <a
+      (click)="clickDropDownMenuItem()"
+      data-bs-toggle="collapse"
+      href="{{ getMenuId(menuItem, false) }}"
+      [attr.aria-expanded]="isActive"
+    >
+      <img
+        [src]="menuItem.icon"
+        style="padding: 10px; cursor: pointer"
+        class="menu-icon"
+        [class.icon-active]="isActive"
+      />
+      <span class="menu-item-text"
+        >{{ refixLabel }} {{ menuItem.name | translate }}</span
+      >
+    </a>
+    <ul
+      class="collapse list-unstyled sidebar-submenuitem"
+      id="{{ getMenuId(menuItem, true) }}"
+      [class.show]="isActive"
+    >
+      <app-ctr-menu-item
+        [menu]="menu"
+        *ngFor="let child of menuItem.children"
+        [menuItem]="child"
+        [refixLabel]="refixLabel + '&nbsp;&nbsp;'"
+        (OnMenuItemClick)="menuItemClick($event)"
+      >
+      </app-ctr-menu-item>
+    </ul>
+  </li>
+</ng-template>

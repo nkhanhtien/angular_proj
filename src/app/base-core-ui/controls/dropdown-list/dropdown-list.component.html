@@ -1,0 +1,37 @@
+﻿<div [ngStyle]="control.style">
+  <label
+    [attr.for]="control.key"
+    [ngStyle]="{ display: control.hideTextHeader === true ? 'None' : '' }"
+    >{{ control.label | translate }}
+    <span *ngIf="validator" style="color: red">*</span>
+  </label>
+  <div [class]="control.classCss">
+    <select
+      [(ngModel)]="value"
+      class="form-control"
+      [disabled]="control.disabled || false"
+      data-style="btn-primary"
+      (blur)="onBlur()"
+      (click)="onClick()"
+      [class.is-invalid]="formControl?.invalid && formControl?.touched"
+      [ngStyle]="{
+        width: control.style && control.style.width ? control.style.width : null
+      }"
+    >
+      <option *ngFor="let item of control['items']" [value]="item.key">
+        {{
+          showPlaceHolder && value === "" && item.value === ""
+            ? (control["placeholder"] | translate)
+            : item.value
+        }}
+      </option>
+    </select>
+    <div
+      *ngIf="formErrors.errors"
+      class="errorBox"
+      style="position: relative; max-width: 230px"
+    >
+      <div *ngFor="let error of formErrors.errors">{{ error | translate }}</div>
+    </div>
+  </div>
+</div>

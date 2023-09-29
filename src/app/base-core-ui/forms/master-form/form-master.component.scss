@@ -1,0 +1,107 @@
+.mat-elevation-z8 {
+  box-shadow: none !important;
+}
+
+.mat-header-row {
+  background-color: #ccc;
+}
+
+.mat-header-row-empty {
+  border-bottom-width: 0px;
+}
+
+.mat-cell {
+  word-break: break-word;
+}
+
+.margin-column {
+  margin-right: 20px;
+}
+
+:host ::ng-deep .toolBarActions button {
+  margin: 5px;
+}
+
+.divFlexParent {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  /* align items in Main Axis */
+  align-items: stretch;
+  /* align items in Cross Axis */
+  align-content: stretch;
+  /* Extra space in Cross Axis */
+  background-color: white;
+}
+
+.divFlexColumn {
+  flex: 1;
+}
+
+.divRight {
+  background-color: #0094ff;
+}
+
+.example-container {
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+}
+
+.mat-header-cell.mat-sort-header-sorted {
+  color: black;
+}
+
+.mat-header-cell,
+.mat-sort-header-content {
+  font-size: 16px !important;
+  line-height: 18px !important;
+  font-weight: bolder !important;
+  color: rgba(0, 0, 0, 1) !important;
+  border: none;
+}
+
+.mat-sort-header-button {
+  font-weight: bolder !important;
+}
+
+:host ::ng-deep .mat-sort-header-stem {
+  height: 14px !important;
+}
+
+.header-icon-container {
+  display: flex;
+  justify-content: center;
+}
+
+.row {
+  margin-right: 0px !important;
+  margin-left: 0px !important;
+}
+
+::ng-deep .mat-sort-header-arrow[style] {
+  // Hide default arrow stem
+  .mat-sort-header-stem {
+    display: none;
+  }
+  .mat-sort-header-indicator {
+    opacity: 1;
+    color: black;
+    font-weight: bold;
+
+    // Hide default arrow as its composed of left, right and middle
+    .mat-sort-header-pointer-left,
+    .mat-sort-header-pointer-right,
+    .mat-sort-header-pointer-middle {
+      display: none;
+    }
+  }
+}
+
+.desc {
+  margin-top: 5px;
+}
+
+.linkAction {
+  font-size: 14px !important;
+}

@@ -1,0 +1,89 @@
+<ctr_loadingPage *ngIf="loading"></ctr_loadingPage>
+
+<div class="form-detail" [hidden]="loading">
+  <div class="row row-title">
+    <div class="col d-flex justify-content-start">
+      <a (click)="goBack()" class="go-back-icon">
+        <span class="material-icons">keyboard_backspace</span>
+      </a>
+      <div class="form-title">
+        {{ "demo.demo3" | translate }}
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <app-formc-wizard-section
+        #formWizardData
+        [hidden]="confirmAccept"
+        [Sections]="formSections"
+        [bottomLeftClass]="'bottomLeftClass'"
+        (OnStepAction)="nextStep($event)"
+        (OnMoveStepAction)="onMoveStepAction($event)"
+        [AfterActionExecute]="afterActionExecute"
+        [WizardActionTypeLabel]="WizardActionTypeLabel"
+        [MoreButtons]="moreButtons"
+        [ShowTopMenuAction]="true"
+        (OnFormGroupChange)="onFormGroupChangeEvent($event)"
+      ></app-formc-wizard-section>
+    </div>
+  </div>
+
+  <div [hidden]="!confirmAccept">
+    <div class="row" style="padding-top: 10px">
+      <div class="col-12 w-100">
+        <ul class="steps top">
+          <li
+            *ngFor="let section of formSections; let indexOfSection = index"
+            class="step"
+            [class.step-active]="true"
+            [class.step-success]="true"
+          >
+            <div class="step-content">
+              <button class="step-circle">
+                {{ indexOfSection + 1 }}
+              </button>
+              <span class="step-text text-center">{{
+                section.sectionName | translate
+              }}</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col mt-5 w-100 d-flex justify-content-center">
+        <h4 class="card-title">
+          {{ "demo.demo3-success" | translate }}
+        </h4>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 d-flex justify-content-center">
+        <button
+          type="button"
+          class="btn btn-action btn-primary"
+          (click)="createAnotherLicense()"
+          style="margin-left: 10px"
+        >
+          {{ "demo.demo3-create-other" | translate }}
+        </button>
+      </div>
+    </div>
+    <div class="row">
+      <div
+        class="col-12 d-flex justify-content-center"
+        style="margin-top: 20px"
+      >
+        <button
+          class="btn btn-outline-primary ms-2 btn-action ng-star-inserted"
+          type="button"
+          (click)="goBack()"
+        >
+          {{ "demo.demo3-go-back" | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,22 @@
+.activity-heading {
+    padding: 10px 0;
+    font-weight: 600;
+}
+
+.activity-title {
+    padding-bottom: 8px;
+}
+
+.filter-panel {
+    margin-bottom: 8px;
+
+    &__desc {
+        justify-content: flex-end;
+    }
+}
+
+.sort-panel {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

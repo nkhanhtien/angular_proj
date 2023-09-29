@@ -1,0 +1,80 @@
+<div class="w-100">
+  <form
+    [formGroup]="form"
+    class="form-inline search-form float-left"
+    (ngSubmit)="onSubmit()"
+  >
+    <div class="input-group">
+      <input
+        type="text"
+        class="form-control search-default-control"
+        [placeholder]="defaultControlPlaceHolder | translate"
+        [(ngModel)]="defaultControlValue"
+        aria-describedby="basic-addon"
+        [ngModelOptions]="{ standalone: true }"
+        (ngModelChange)="onChange()"
+        (focus)="focus()"
+        (blur)="blurEvent()"
+      />
+      <div
+        class="input-group-prepend"
+        *ngIf="this.moreSearchControls.length > 0"
+      >
+        <span
+          class="input-group-text search-more-control"
+          id="searchMoreControl"
+          (click)="searchMoreControl()"
+          style="cursor: pointer"
+          title="{{ 'searchMore' | translate }}"
+          [class.focused-icon]="isFocused"
+        >
+          <mat-icon class="rotate-90">tune</mat-icon>
+        </span>
+      </div>
+      <div class="input-group-prepend">
+        <span
+          class="input-group-text button-search-bar btn-search"
+          id="searchIcon"
+          (click)="onSubmit()"
+          title="{{ 'search' | translate }}"
+        >
+          <mat-icon>search</mat-icon>
+        </span>
+      </div>
+      <div [hidden]="!showMore" class="search-form-more-control form-inline">
+        <div class="search-form-more-control-items form-group">
+          <div
+            *ngFor="let control of moreSearchControls"
+            class="input-group search-form-more-control-item"
+          >
+            <control-selector
+              class="label"
+              [control]="control"
+              [form]="form"
+            ></control-selector>
+          </div>
+          <div
+            [hidden]="!IsApply"
+            class="btn btn-outline-primary btn-action search-form-more-control-apply"
+            (click)="onSubmit()"
+          >
+            {{ "apply" | translate }}
+          </div>
+          <div
+            [hidden]="IsApply"
+            class="btn btn-primary search-form-more-control-reset button-search-bar"
+            (click)="onReset()"
+          >
+            {{ "reset" | translate }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <button
+      class="hidden-submit"
+      type="submit"
+      tabindex="-1"
+      (keyup.enter)="onSubmit()"
+    ></button>
+  </form>
+</div>

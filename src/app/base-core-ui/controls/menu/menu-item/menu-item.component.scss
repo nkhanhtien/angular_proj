@@ -1,0 +1,37 @@
+.sidebar-submenuitem li a {
+  padding-left: 15px;
+}
+
+.menu-icon {
+  width: 40px;
+}
+
+.menu-item-text {
+  font-size: 12px;
+  color: #333333;
+  font-weight: 600;
+}
+
+.menu-item {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.menu-item-active {
+  background-color: #f9fafe;
+  border-left: 5px solid #2969e3;
+  padding-left: 0px !important;
+}
+
+.sidebar-submenuitem .menu-item-active {
+  padding-left: 10px !important;
+}
+
+.no-image-active {
+  padding-right: 15px !important;
+}
+
+.icon-active {
+  filter: invert(85%) sepia(77%) saturate(4168%) hue-rotate(213deg)
+    brightness(94%) contrast(89%);
+}

@@ -1,0 +1,57 @@
+<div
+  class="d-flex justify-content-center align-items-center min-vh-100 py-3 py-md-0 background"
+>
+  <div class="align-middle">
+    <h3 class="text-white text-center auth-logo">
+      <img src="assets/img/fense-logo.png" alt="logo" />
+    </h3>
+    <div class="card login-card">
+      <div class="row no-gutters">
+        <div class="card-body">
+          <div class="brand-wrapper d-flex justify-content-center">
+            <img src="assets/img/logo.png" alt="logo" class="w-80" />
+          </div>
+
+          <div class="login-card-description d-flex justify-content-center">
+            {{ "auth.login-form.title" | translate }}
+          </div>
+
+          <div class="d-flex justify-content-center container-fluid">
+            <app-formc-single
+              class="w-100"
+              #LoginForm
+              [controls]="controls"
+              [validatorFn]="validatorFn"
+              (OnFormControlStatusChanges)="onFormControlStatusChanges($event)"
+              (keydown.enter)="submit()"
+            ></app-formc-single>
+          </div>
+          <div *ngIf="generalError !== ''" class="error-message">
+            {{ generalError | translate }}
+          </div>
+
+          <div class="d-flex justify-content-center">
+            <button
+              type="submit"
+              class="btn  btn-submit {{
+                shouldDisabledLoginButton ? 'btn-dark' : 'btn-primary'
+              }}"
+              (click)="submit()"
+              [disabled]="shouldDisabledLoginButton"
+            >
+              {{ "auth.login-form.login" | translate }}
+            </button>
+          </div>
+          <div class="d-flex justify-content-center" style="margin-top: 20px">
+            <a
+              style="cursor: pointer"
+              (click)="forgotPass()"
+              class="forgot-password-link text-primary"
+              >{{ "auth.login-form.forgot-password" | translate }}</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

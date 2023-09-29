@@ -1,0 +1,22 @@
+﻿<style>
+  .view-value {
+    padding-top: 5px;
+    padding-left: 1px;
+    padding-bottom: 10px;
+    font-size: 16px;
+    font-weight: 400;
+    white-space: pre-wrap;
+  }
+</style>
+
+<div [ngStyle]="control.style || {}">
+  <label
+    *ngIf="control.label && control.label !== ''"
+    [attr.for]="control.key"
+    [ngStyle]="{ display: control.hideTextHeader === true ? 'None' : '' }"
+    >{{ control.label | translate }} {{ value }}</label
+  >
+  <div class="view-value {{ control.classCss }}">
+    {{ control.value }}
+  </div>
+</div>

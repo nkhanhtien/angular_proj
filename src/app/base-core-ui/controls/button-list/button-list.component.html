@@ -1,0 +1,12 @@
+<style>
+  :host /deep/ a.button {
+    margin: 5px;
+  }
+</style>
+<div class="toolBarButton">
+  <div *ngFor="let item of ButtonList">
+    <a href="#" class="button blue" (click)="itemClicked(item)">{{
+      item.buttonLabel | translate
+    }}</a>
+  </div>
+</div>

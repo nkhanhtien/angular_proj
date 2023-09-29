@@ -1,0 +1,522 @@
+﻿<div *ngIf="isShowEmptyForm(); then emptyFrom; else dataForm"></div>
+
+<ng-template #emptyFrom>
+  <div class="divFlexParent">
+    <div
+      *ngIf="!showDetailSection"
+      class="example-container mat-elevation-z8 divFlexColumn"
+    >
+      <mat-table
+        #table
+        [dataSource]="GridSource"
+        (matSortChange)="onSortChange($event)"
+        matSort
+      >
+        <ng-container matColumnDef="select">
+          <mat-header-cell *matHeaderCellDef style="flex: 0 0 60px">
+            <mat-checkbox
+              [checked]="selection.hasValue() && isAllSelected()"
+              [indeterminate]="selection.hasValue() && !isAllSelected()"
+            >
+            </mat-checkbox>
+          </mat-header-cell>
+        </ng-container>
+        <!-- Generic column definition -->
+        <ng-container
+          *ngFor="let column of columnsWithoutAction()"
+          [cdkColumnDef]="column.columnDef"
+        >
+          <mat-header-cell *cdkHeaderCellDef class="mat-header-cell">
+            <div mat-sort-header [disabled]="true">
+              {{ column.header | translate }}
+            </div>
+          </mat-header-cell>
+        </ng-container>
+
+        <ng-container
+          *ngIf="GridDefinitions.rowActions.length > 0"
+          matColumnDef="actions"
+        >
+          <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+        </ng-container>
+
+        <mat-header-row
+          class="mat-header-row-empty mat-header-row"
+          *matHeaderRowDef="GridDefinitions.displayedColumns"
+        >
+        </mat-header-row>
+      </mat-table>
+      <div class="row" style="padding-top: 20px">
+        <div class="col">
+          <img
+            src="/assets/img/EmptyForm.svg"
+            width="30%"
+            class="rounded mx-auto d-block"
+          />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <p
+            width="30%"
+            class="d-flex justify-content-center"
+            style="font-size: 2rem; font-weight: bold"
+          >
+            {{ "form-master.no-data" | translate }}
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <p
+            width="30%"
+            class="d-flex justify-content-center"
+            style="font-size: 1rem; color: rgba(0, 0, 0, 0.5)"
+          >
+            {{ EmptyFormText | translate }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #dataForm>
+  <div class="divFlexParent">
+    <div
+      *ngIf="!showDetailSection"
+      class="example-container mat-elevation-z8 divFlexColumn"
+    >
+      <div class="row">
+        <div
+          *ngIf="isSearching"
+          class="col"
+          style="background-color: #b4eeb4; min-height: 50px; padding-top: 5px"
+        >
+          <span
+            style="
+              font-size: 18px;
+              font-weight: bolder;
+              color: black;
+              padding-left: 0px;
+            "
+          >
+            {{ searchingText }}
+          </span>
+          <button
+            mat-icon-button
+            (click)="onClearSearch()"
+            style="background-color: #118c8b"
+          >
+            <mat-icon>clear</mat-icon>
+          </button>
+        </div>
+        <div class="col" style="background-color: #b4eeb4">
+          <app-ctr-button-list
+            [ButtonList]="ButtonList"
+            (ActionClicked)="ActionClicked($event)"
+          >
+          </app-ctr-button-list>
+        </div>
+      </div>
+      <mat-table
+        #table
+        [dataSource]="GridSource"
+        (matSortChange)="onSortChange($event)"
+        matSort
+        style="overflow-x: auto"
+      >
+        <ng-container matColumnDef="select">
+          <mat-header-cell *matHeaderCellDef class="mat-header-cell" style="flex: 0 0 60px">
+            <mat-checkbox
+              (change)="$event ? masterToggle() : null"
+              [checked]="selection.hasValue() && isAllSelected()"
+              [indeterminate]="selection.hasValue() && !isAllSelected()"
+            >
+            </mat-checkbox>
+          </mat-header-cell>
+          <mat-cell *matCellDef="let row" style="flex: 0 0 60px">
+            <mat-checkbox
+              (click)="$event.stopPropagation()"
+              (change)="$event ? selection.toggle(row) : null"
+              [checked]="selection.isSelected(row)"
+            >
+            </mat-checkbox>
+          </mat-cell>
+        </ng-container>
+        <!-- Generic column definition -->
+        <ng-container
+          *ngFor="let column of columnsWithoutAction()"
+          [cdkColumnDef]="column.columnDef"
+        >
+          <mat-header-cell
+            *cdkHeaderCellDef
+            [ngStyle]="column.style || {}"
+            class="margin-column mat-header-cell"
+          >
+            <div mat-sort-header [disabled]="column.notSort">
+              {{ column.header | translate }}
+              <span>
+                <mat-icon
+                  *ngIf="isSortColumn(column.columnDef)"
+                  [class.desc]="sort.direction === 'desc'"
+                >
+                  {{
+                    sort.direction === "asc"
+                      ? "arrow_drop_up"
+                      : "arrow_drop_down"
+                  }}</mat-icon
+                >
+              </span>
+            </div>
+            <div
+              *ngIf="GridDefinitions.showSearchHeader"
+              class="header-icon-container"
+            >
+              <button
+                *ngIf="
+                  column.showSearch && column.searchType === SearchType.Text
+                "
+                mat-icon-button
+                color="primary"
+                #menuSearchTextTrigger="matMenuTrigger"
+                [matMenuTriggerFor]="menuSearchText"
+                (menuOpened)="menuSearchTextOpened(column)"
+                [matMenuTriggerData]="{ columnDef: column.columnDef }"
+              >
+                <mat-icon>search</mat-icon>
+              </button>
+              <button
+                *ngIf="
+                  column.showSearch && column.searchType === SearchType.Number
+                "
+                mat-icon-button
+                color="primary"
+                #menuSearchNumberTrigger="matMenuTrigger"
+                [matMenuTriggerFor]="menuSearchNumber"
+                (menuOpened)="menuSearchNumberOpened(column)"
+                [matMenuTriggerData]="{ columnDef: column.columnDef }"
+              >
+                <mat-icon>search</mat-icon>
+              </button>
+              <button
+                *ngIf="
+                  column.showSearch && column.searchType === SearchType.DateTime
+                "
+                mat-icon-button
+                color="primary"
+                #menuSearchDateTrigger="matMenuTrigger"
+                [matMenuTriggerFor]="menuSearchDate"
+                (menuOpened)="menuSearchDateOpened(column)"
+                [matMenuTriggerData]="{ columnDef: column.columnDef }"
+              >
+                <mat-icon>search</mat-icon>
+              </button>
+              <button
+                *ngIf="
+                  column.showSearch &&
+                  column.searchType === SearchType.MultipleSelected
+                "
+                mat-icon-button
+                color="primary"
+                #menuSearchMultipleSelectedTrigger="matMenuTrigger"
+                (menuOpened)="menuSearchMultipleSelectedOpened(column)"
+                [matMenuTriggerFor]="menuSearchMultipleSelected"
+                [matMenuTriggerData]="{ columnDef: column.columnDef }"
+              >
+                <mat-icon>search</mat-icon>
+              </button>
+            </div>
+          </mat-header-cell>
+
+          <mat-cell
+            *cdkCellDef="let row"
+            [ngStyle]="column.style || {}"
+            class="margin-column"
+          >
+            <span *ngIf="column.dataType === DataColumnType.DateTime">
+              {{ column.cell(row) | date: column.dataFormat }}
+            </span>
+
+            <ng-container
+              *ngIf="
+                isDisplayedLinkAction(row, column.linkAction);
+                then linkText;
+                else normalText
+              "
+            >
+            </ng-container>
+            <ng-template #linkText>
+              <span>
+                <a
+                  href="javascript:void(0);"
+                  class="linkAction"
+                  (click)="executeLinkAction(column.linkAction, row)"
+                  >{{ column.cell(row) }}</a
+                >
+              </span>
+            </ng-template>
+            <ng-template #normalText>
+              <span
+                *ngIf="column.dataType === DataColumnType.Text"
+                [ngStyle]="{ color: disabledRow(row) ? '#DCDCDC' : '' }"
+              >
+                {{ column.cell(row) }}
+              </span>
+            </ng-template>
+
+            <mat-checkbox
+              *ngIf="column.dataType === DataColumnType.Bool"
+              disabled
+              [checked]="column.cell(row)"
+            >
+            </mat-checkbox>
+          </mat-cell>
+        </ng-container>
+
+        <div
+          *ngIf="
+            checkDefinedColumnAction();
+            then definedColumnAction;
+            else noDefinedColumnAction
+          "
+        ></div>
+
+        <ng-template #definedColumnAction>
+          <ng-container
+            *ngIf="GridDefinitions.rowActions.length > 0"
+            matColumnDef="actions"
+          >
+            <mat-header-cell
+              *matHeaderCellDef
+              [ngStyle]="columnAction.style || {}"
+              >{{ columnAction.header | translate }}
+            </mat-header-cell>
+            <mat-cell
+              *matCellDef="let row"
+              [ngStyle]="columnAction.style || {}"
+            >
+              <div
+                *ngFor="
+                  let action of displayActions(row);
+                  let controlIndex = index
+                "
+              >
+                <div
+                  *ngIf="action.icon_type; then iconAction; else buttonAction"
+                ></div>
+                <ng-template #iconAction>
+                  <span
+                    class="material-icons"
+                    [ngStyle]="{
+                      color: action.iconColor ? action.iconColor : '#2969E3',
+                      cursor: 'pointer',
+                      'margin-right':
+                        controlIndex < displayActions(row).length - 1
+                          ? '10px'
+                          : '0px'
+                    }"
+                    (click)="RowActions(action, row)"
+                    title="{{ action.actionLabel | translate }}"
+                  >
+                    {{ action.icon_type }}
+                  </span>
+                </ng-template>
+                <ng-template #buttonAction>
+                  <div
+                    *ngIf="action.primaryAction"
+                    (click)="RowActions(action, row)"
+                    class="btn {{
+                      action.customClass
+                        ? action.customClass
+                        : 'btn-outline-primary'
+                    }}"
+                    [ngStyle]="{
+                      padding: '3px 10px 3px 10px',
+                      'font-weight': 'bold',
+                      'margin-right':
+                        controlIndex < displayActions(row).length - 1
+                          ? '10px'
+                          : '0px'
+                    }"
+                  >
+                    {{ action.actionLabel | translate }}
+                  </div>
+                </ng-template>
+              </div>
+              <ng-container *ngIf="GridDefinitions.showNonePrimaryAction">
+                <button mat-button [matMenuTriggerFor]="belowMenu">...</button>
+                <mat-menu #belowMenu="matMenu" yPosition="below">
+                  <ng-container *ngFor="let action of displayActions(row)">
+                    <button
+                      *ngIf="!action.primaryAction"
+                      mat-menu-item
+                      (click)="RowActions(action, row)"
+                    >
+                      {{ action.actionLabel | translate }}
+                    </button>
+                  </ng-container>
+                </mat-menu>
+              </ng-container>
+            </mat-cell>
+          </ng-container>
+        </ng-template>
+
+        <ng-template #noDefinedColumnAction>
+          <ng-container
+            *ngIf="GridDefinitions.rowActions.length > 0"
+            matColumnDef="actions"
+          >
+            <mat-header-cell *matHeaderCellDef class="mat-header-cell"
+              >{{ "Action" | translate }}
+            </mat-header-cell>
+            <mat-cell *matCellDef="let row">
+              <div
+                *ngFor="
+                  let action of displayActions(row);
+                  let controlIndex = index
+                "
+              >
+                <div
+                  *ngIf="action.icon_type; then iconAction; else buttonAction"
+                ></div>
+                <ng-template #iconAction>
+                  <span
+                    class="material-icons"
+                    [ngStyle]="{
+                      color: action.iconColor ? action.iconColor : '#2969E3',
+                      cursor: 'pointer',
+                      'margin-right':
+                        controlIndex < displayActions(row).length - 1
+                          ? '10px'
+                          : '0px'
+                    }"
+                    (click)="RowActions(action, row)"
+                    title="{{ action.actionLabel | translate }}"
+                  >
+                    {{ action.icon_type }}
+                  </span>
+                </ng-template>
+                <ng-template #buttonAction>
+                  <button
+                    *ngIf="action.primaryAction"
+                    (click)="RowActions(action, row)"
+                    class="btn {{
+                      action.customClass
+                        ? action.customClass
+                        : 'btn-outline-primary'
+                    }}"
+                    [ngStyle]="{
+                      padding: 'revert',
+                      'margin-right':
+                        controlIndex < displayActions(row).length - 1
+                          ? '10px'
+                          : '0px'
+                    }"
+                  >
+                    {{ action.actionLabel | translate }}
+                  </button>
+                </ng-template>
+              </div>
+              <ng-container *ngIf="GridDefinitions.showNonePrimaryAction">
+                <button mat-button [matMenuTriggerFor]="belowMenu">...</button>
+                <mat-menu #belowMenu="matMenu" yPosition="below">
+                  <ng-container *ngFor="let action of displayActions(row)">
+                    <button
+                      *ngIf="!action.primaryAction"
+                      mat-menu-item
+                      (click)="RowActions(action, row)"
+                    >
+                      {{ action.actionLabel | translate }}
+                    </button>
+                  </ng-container>
+                </mat-menu>
+              </ng-container>
+            </mat-cell>
+          </ng-container>
+        </ng-template>
+
+        <mat-header-row
+          class="mat-header-row"
+          *matHeaderRowDef="GridDefinitions.displayedColumns"
+        ></mat-header-row>
+        <mat-row
+          *matRowDef="let row; columns: GridDefinitions.displayedColumns"
+        ></mat-row>
+      </mat-table>
+
+      <div
+        style="background-color: white"
+        [ngStyle]="{ display: showPaginator === true ? '' : 'None' }"
+      >
+        <mat-paginator
+          #paginator
+          [length]="PageInfo === undefined ? 100 : PageInfo.total"
+          [pageSize]="PageInfo === undefined ? 10 : PageInfo.pageSize"
+          [showFirstLastButtons]="true"
+          [pageSizeOptions]="
+            PageInfo === undefined
+              ? [5, 10, 20, 25, 100]
+              : PageInfo.pageSizeOptions
+          "
+          (page)="onPageChange($event)"
+        >
+        </mat-paginator>
+      </div>
+    </div>
+
+    <div class="divFlexColumn divRight" *ngIf="showDetailSection">
+      <app-dynamic-component
+        [componentData]="CompDetailSection"
+        (ComponentEvents)="onDetailEvents($event)"
+      >
+      </app-dynamic-component>
+    </div>
+  </div>
+
+  <div>
+    <mat-menu #menuSearchText="matMenu">
+      <div style="padding: 10px" (click)="$event.stopPropagation()">
+        <ng-template matMenuContent>
+          <app-ctr-menu-grid-search-text
+            [searchItem]="searchHeaderTextInfoObject"
+            (ActionClicked)="menuSearchTextAction($event)"
+          ></app-ctr-menu-grid-search-text>
+        </ng-template>
+      </div>
+    </mat-menu>
+
+    <mat-menu #menuSearchNumber="matMenu">
+      <div style="padding: 10px" (click)="$event.stopPropagation()">
+        <ng-template matMenuContent>
+          <app-ctr-menu-grid-search-number
+            [searchItem]="searchHeaderNumberInfoObject"
+            (ActionClicked)="menuSearchNumberAction($event)"
+          ></app-ctr-menu-grid-search-number>
+        </ng-template>
+      </div>
+    </mat-menu>
+
+    <mat-menu #menuSearchDate="matMenu">
+      <div style="padding: 10px" (click)="$event.stopPropagation()">
+        <ng-template matMenuContent>
+          <app-ctr-menu-grid-search-date
+            [searchItem]="searchHeaderDateInfoObject"
+            (ActionClicked)="menuSearchDateAction($event)"
+          ></app-ctr-menu-grid-search-date>
+        </ng-template>
+      </div>
+    </mat-menu>
+
+    <mat-menu #menuSearchMultipleSelected="matMenu">
+      <div style="padding: 10px" (click)="$event.stopPropagation()">
+        <ng-template matMenuContent>
+          <app-ctr-menu-grid-search-multiple-selected
+            [searchItem]="searchHeaderMultipleSelectedInfoObject"
+            (ActionClicked)="menuSearchMultipleSelectedAction($event)"
+          ></app-ctr-menu-grid-search-multiple-selected>
+        </ng-template>
+      </div>
+    </mat-menu>
+  </div>
+</ng-template>

@@ -1,0 +1,49 @@
+<div id="show-sidebar" class="bg-light" (click)="showMenu()">
+  <img src="./assets/icons/show-menu-bar.png" />
+</div>
+<nav class="sidebar-wrapper">
+  <div class="sidebar-content" *ngIf="menu">
+    <!-- menu brand -->
+    <div class="sidebar-brand">
+      <a href="javascript:;">{{ menu.name }}</a>
+      <div (click)="hideMenu()">
+        <img
+          src="/assets/img/icons/close.png"
+          style="padding: 4px; cursor: pointer; width: 22px; height: 22px"
+        />
+      </div>
+    </div>
+
+    <!-- sidebar-search  -->
+    <div *ngIf="menu.haveSearchBar" class="sidebar-search">
+      <div>
+        <div class="input-group">
+          <input
+            type="text"
+            class="form-control search-menu"
+            placeholder="Search..."
+            [(ngModel)]="searchValue"
+            (input)="onSearch()"
+          />
+          <div class="input-group-append">
+            <span class="input-group-text">
+              <i class="fa fa-search" aria-hidden="true"></i>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- menu body -->
+    <div class="sidebar-menu">
+      <ul>
+        <app-ctr-menu-item
+          *ngFor="let menuItem of menu.menuItems"
+          [menu]="menu"
+          [menuItem]="menuItem"
+          (OnMenuItemClick)="menuItemClicked($event)"
+        ></app-ctr-menu-item>
+      </ul>
+    </div>
+  </div>
+</nav>

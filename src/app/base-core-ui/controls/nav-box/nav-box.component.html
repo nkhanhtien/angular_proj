@@ -1,0 +1,94 @@
+﻿<div class="divContent">
+  <div style="padding: 5px; width: 100%" class="searchBox">
+    <input type="text" value="{{ Box.NavSearch }}" />
+  </div>
+
+  <div
+    *ngIf="
+      Box.NavSelectedGroup === null ? false : Box.NavSelectedGroup.length > 0
+    "
+    style="width: 100%; float: left; background: #b1bd8c"
+  >
+    <div
+      *ngFor="let group of Box.NavSelectedGroup"
+      style="float: right; padding: 5px"
+    >
+      <button
+        type="button"
+        class="btn btn-default btn-sm"
+        (click)="NavSelectedGroupClicked(group)"
+      >
+        <i class="ion-md-home"></i>
+      </button>
+    </div>
+  </div>
+
+  <div
+    *ngFor="let group of Box.NavShowedGroup"
+    style="width: 100%; float: left"
+  >
+    <div class="menu-group" (click)="NavGroupClicked(group)">
+      <button
+        style="margin-right: 15px"
+        *ngIf="
+          (group.parentKey !== undefined ? group.parentKey.trim().length : 0) >
+          0
+        "
+        type="button"
+        class="btn btn-default btn-sm"
+        (click)="NavBackItemClicked(group)"
+      >
+        <i class="ion ion-md-arrow-dropleft-circle"></i>
+      </button>
+      <label>{{ group.title }}</label>
+    </div>
+    <!--<div *ngIf="!group.isGroup" class="menu-group">
+            <button style="margin-right:15px;" *ngIf="group.parentKey.trim().length>0" type="button" class="btn btn-default btn-sm" (click)="NavBackItemClicked(childItem)">
+                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            </button>
+            <label >{{group.title}}</label>
+        </div>-->
+    <ng-container *ngIf="group.showItems">
+      <div
+        *ngFor="let childItem of group.items"
+        class="menu-item"
+        style="float: left"
+      >
+        <div style="float: left; width: 80%">
+          <a
+            class="nav-link"
+            *ngIf="
+              (childItem.path !== undefined ? childItem.path.length : 0) > 0
+            "
+            [routerLink]="['/' + childItem.path]"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            >{{ childItem.title }}</a
+          >
+          <span
+            style="color: #337ab7"
+            *ngIf="
+              (childItem.path !== undefined ? childItem.path.length : 0) === 0
+            "
+            >{{ childItem.title }}</span
+          >
+        </div>
+
+        <div style="float: left; width: 20%">
+          <div style="float: right">
+            <button
+              *ngIf="
+                (childItem.items !== undefined ? childItem.items.length : 0) > 0
+              "
+              type="button"
+              class="btn btn-default btn-sm"
+              (click)="NavItemClicked(childItem, group)"
+            >
+              <i class="ion ion-md-arrow-dropright-circle"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>

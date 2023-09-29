@@ -1,0 +1,14 @@
+﻿<div>
+  <label
+    *ngIf="control.label && control.label !== ''"
+    [attr.for]="control.key"
+    [ngStyle]="{ display: control.hideTextHeader === true ? 'None' : '' }"
+    >{{ control.label | translate }}
+    <span *ngIf="validator" style="color: red">*</span></label
+  >
+  <div [class]="control.classCss">
+    <mat-checkbox [disabled]="control.disabled || false" [(ngModel)]="value">{{
+      control.label | translate
+    }}</mat-checkbox>
+  </div>
+</div>

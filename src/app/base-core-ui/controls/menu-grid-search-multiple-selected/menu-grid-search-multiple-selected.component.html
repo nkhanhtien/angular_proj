@@ -1,0 +1,35 @@
+<input type="hidden" [value]="searchItem.columnDef" />
+<div>
+  <mat-form-field>
+    <mat-label>Select Values</mat-label>
+    <mat-select [formControl]="searchMultipleSelectedControl" multiple>
+      <mat-select-trigger>
+        {{
+          searchMultipleSelectedControl.value?.length > 0
+            ? searchMultipleSelectedControl.value[0].text
+            : ""
+        }}
+        <span *ngIf="searchMultipleSelectedControl.value?.length > 1">
+          (+{{ searchMultipleSelectedControl.value.length - 1 }}
+          {{
+            searchMultipleSelectedControl.value?.length === 2
+              ? "other"
+              : "others"
+          }})
+        </span>
+      </mat-select-trigger>
+      <mat-option *ngFor="let item of searchItem.selectOptions" [value]="item">
+        {{ item.text }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<div>
+  <button mat-button (click)="menuSeachAction({ action: 'close' })">
+    Cancel
+  </button>
+  <button mat-button (click)="menuSeachAction({ action: 'search' })">
+    Search
+  </button>
+</div>

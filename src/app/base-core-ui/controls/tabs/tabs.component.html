@@ -1,0 +1,14 @@
+﻿<mat-tab-group
+  #MatTabGroup
+  mat-align-tabs="start"
+  (selectedTabChange)="selectedTabValue($event)"
+  [ngStyle]="TabStyle"
+>
+  <mat-tab *ngFor="let item of TabItems" id="{{ item.key }}">
+    <ng-template mat-tab-label>
+      <div class="tab-label" id="{{ item.key }}">
+        {{ item.label ?? "" | translate }}
+      </div>
+    </ng-template>
+  </mat-tab>
+</mat-tab-group>

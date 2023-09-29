@@ -1,0 +1,56 @@
+<div style="min-height: 100%">
+  <div class="formTitle" *ngIf="FormTitle">
+    {{ FormTitle }}
+  </div>
+  <div>
+    <app-ctr-button-list
+      [ButtonList]="ButtonList"
+      (ActionClicked)="ActionClicked($event)"
+    >
+    </app-ctr-button-list>
+  </div>
+  <form (ngSubmit)="onSubmit()" [formGroup]="form" class="formContent">
+    <div *ngIf="FormCategories !== undefined && FormCategories.length > 0">
+      <mat-accordion multi="true">
+        <mat-expansion-panel
+          *ngFor="let category of FormCategories"
+          [expanded]="category.expandedDefault"
+        >
+          <mat-expansion-panel-header class="panelHeader">
+            <mat-panel-title>
+              <h4>{{ category.categoryName }}</h4>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+
+          <div *ngFor="let control of category.controls" class="form-row">
+            <control-selector
+              [control]="control"
+              [form]="form"
+            ></control-selector>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+
+    <div *ngIf="FormCategories === undefined || FormCategories.length === 0">
+      <mat-accordion>
+        <mat-expansion-panel [expanded]="true" [disabled]="true">
+          <mat-expansion-panel-header></mat-expansion-panel-header>
+          <div
+            *ngFor="let control of controls"
+            class="form-row"
+            style="color: #4f4f4f"
+          >
+            <app-ctr-template-control
+              [control]="control"
+              [form]="form"
+            ></app-ctr-template-control>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+      <!--<div *ngFor="let control of controls" class="form-row">
+                  <control-selector [control]="control" [form]="form"></control-selector>
+              </div>-->
+    </div>
+  </form>
+</div>

@@ -1,0 +1,17 @@
+.mat-checkbox-label {
+  margin-bottom: 0px !important;
+}
+label {
+  display: inline-block;
+  margin-bottom: 0rem;
+}
+.mat-checkbox-layout {
+  margin-bottom: 0px !important;
+}
+.mat-tree-node {
+  min-height: 40px !important;
+}
+.tree-node-checkbox {
+  margin-bottom: 0px;
+  padding-right: 5px;
+}

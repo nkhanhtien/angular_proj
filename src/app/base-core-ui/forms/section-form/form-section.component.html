@@ -1,0 +1,52 @@
+﻿<div class="flexbox-parent">
+  <div class="flexbox-item fill-area flexbox-item-grow">
+    <div class="divLeftBody fill-area-content flexbox-item-grow detailLeft">
+      <div class="fill-area-content flexbox-item-grow">
+        <div
+          *ngFor="let section of Sections"
+          class="buttonList"
+          [class.active]="section.selected"
+          (click)="clickSection(section)"
+        >
+          {{ section.sectionName }}
+        </div>
+      </div>
+    </div>
+
+    <div class="divCenterBody fill-area-content flexbox-item-grow detailRight">
+      <app-dynamic-component
+        *ngIf="compDetailSection !== undefined"
+        [componentData]="compDetailSection"
+      ></app-dynamic-component>
+    </div>
+  </div>
+</div>
+<style>
+  div .buttonList {
+    display: inline-block;
+    background: #fafafa;
+    box-shadow: 0 0 5px -1px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    vertical-align: middle;
+    min-width: 300px;
+    padding: 25px;
+    text-align: center;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-color: rgba(0, 0, 0, 0.06);
+    color: rgba(0, 0, 0, 0.54);
+  }
+  .detailLeft {
+    background-color: aquamarine;
+    max-width: 300px;
+  }
+  .detailRight {
+    background-color: darkcyan;
+  }
+
+  .active {
+    background-color: white !important;
+    color: black;
+    font-weight: bolder;
+  }
+</style>

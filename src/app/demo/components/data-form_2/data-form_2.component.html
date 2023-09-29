@@ -1,0 +1,17 @@
+<div class="row">
+  <div class="col w-100 d-flex justify-content-center">
+    <h4 class="card-title">Step 2: Select policy {{ index }}</h4>
+  </div>
+</div>
+
+<br />
+
+<div class="row">
+  <div class="col w-100 d-flex justify-content-center">
+    <app-formc-single
+      #ChildForm
+      [FormTitle]="'demo.demo3-step2' | translate"
+      [controls]="controls"
+    ></app-formc-single>
+  </div>
+</div>

@@ -1,0 +1,27 @@
+.wrapper {
+    .form {
+        display: flex;
+        flex-direction: column;
+        padding: 12px 24px;
+        flex: 2;
+    }
+
+    .btn-group {
+        display: flex;
+        align-self: flex-end;
+        padding: 0 24px 5px !important;
+
+        button {
+            margin-left: 10px;
+        }
+    }
+
+    &__error-message {
+        font-size: 14px;
+        color: #000000;
+        background-color: #f1a2a2;
+        padding: 6px 12px;
+        border-radius: 4px;
+        margin: 0 24px;
+    }
+}

@@ -1,0 +1,29 @@
+<input type="hidden" [value]="searchItem.columnDef" />
+<div>
+  <mat-form-field>
+    <input
+      type="number"
+      matInput
+      placeholder="Min Value ..."
+      [(ngModel)]="searchItem.minValue"
+    />
+  </mat-form-field>
+</div>
+<div>
+  <mat-form-field>
+    <input
+      type="number"
+      matInput
+      placeholder="Max Value ..."
+      [(ngModel)]="searchItem.maxValue"
+    />
+  </mat-form-field>
+</div>
+<div>
+  <button mat-button (click)="menuSeachAction({ action: 'close' })">
+    Cancel
+  </button>
+  <button mat-button (click)="menuSeachAction({ action: 'search' })">
+    Search
+  </button>
+</div>

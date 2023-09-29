@@ -1,0 +1,23 @@
+<div style="margin-bottom: 24px">
+  <div
+    class="formTitle"
+    style="display: flex; background-color: white; align-items: center"
+  >
+    <p style="margin-right: 20px; padding-top: 50px">{{ FormTitle }}</p>
+    <form [formGroup]="form" class="formContent" style="display: flex">
+      <div
+        *ngFor="let control of controls"
+        class="form-row"
+        style="padding: 5px"
+      >
+        <app-ctr-template-control
+          [control]="control"
+          [form]="form"
+        ></app-ctr-template-control>
+      </div>
+    </form>
+    <mat-icon style="margin-left: 15px; padding-top: 23px" (click)="onSubmit()"
+      >search</mat-icon
+    >
+  </div>
+</div>

@@ -1,0 +1,186 @@
+﻿.transition,
+form button,
+form .searchBox label,
+form .searchBox input[type="text"] {
+  -moz-transition: all 0.25s cubic-bezier(0.53, 0.01, 0.35, 1.5);
+  -o-transition: all 0.25s cubic-bezier(0.53, 0.01, 0.35, 1.5);
+  -webkit-transition: all 0.25s cubic-bezier(0.53, 0.01, 0.35, 1.5);
+  transition: all 0.25s cubic-bezier(0.53, 0.01, 0.35, 1.5);
+}
+
+* {
+  font-family: Helvetica, sans-serif;
+  font-weight: light;
+  -webkit-font-smoothing: antialiased;
+}
+
+.divContent {
+  position: relative;
+  display: inline-block;
+  box-sizing: border-box;
+  padding: 20px 20px;
+  background-color: white;
+  /*border-radius: 20px;*/
+  /*margin: 40px 0;*/
+  left: 50%;
+  -moz-transform: translate(-50%, 0);
+  -ms-transform: translate(-50%, 0);
+  -webkit-transform: translate(-50%, 0);
+  transform: translate(-50%, 0);
+  min-height: 500px;
+  min-width: 300px;
+  width: 100%;
+  border-width: 0px;
+  border-color: white;
+}
+
+.divContent h1 {
+  color: #ff4a56;
+  font-weight: 100;
+  letter-spacing: 0.01em;
+  margin-left: 15px;
+  margin-bottom: 35px;
+  text-transform: uppercase;
+}
+
+.divContent .searchBox {
+  position: relative;
+  padding: 10px 0;
+}
+
+.divContent .searchBox:first-of-type {
+  padding-top: 0;
+}
+
+.divContent .searchBox:last-of-type {
+  padding-bottom: 0;
+}
+
+.divContent .searchBox label {
+  transform-origin: left center;
+  color: #ff4a56;
+  font-weight: 100;
+  letter-spacing: 0.01em;
+  font-size: 17px;
+  box-sizing: border-box;
+  padding: 10px 15px;
+  display: block;
+  position: absolute;
+  margin-top: -40px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.divContent .searchBox input[type="text"] {
+  appearance: none;
+  background-color: none;
+  border: 1px solid #ff4a56;
+  line-height: 0;
+  font-size: 17px;
+  width: 100%;
+  display: block;
+  box-sizing: border-box;
+  padding: 10px 15px;
+  border-radius: 60px;
+  color: #ff4a56;
+  font-weight: 100;
+  letter-spacing: 0.01em;
+  position: relative;
+  z-index: 1;
+}
+
+.divContent .searchBox input[type="text"]:focus {
+  outline: none;
+  background: #ff4a56;
+  color: white;
+  margin-top: 30px;
+}
+
+.divContent .searchBox input[type="text"]:valid {
+  margin-top: 0px;
+}
+
+.divContent .searchBox input[type="text"]:focus ~ label {
+  -moz-transform: translate(0, -35px);
+  -ms-transform: translate(0, -35px);
+  -webkit-transform: translate(0, -35px);
+  transform: translate(0, -35px);
+}
+
+.divContent .searchBox input[type="text"]:valid ~ label {
+  text-transform: uppercase;
+  font-style: italic;
+  -moz-transform: translate(5px, -35px) scale(0.6);
+  -ms-transform: translate(5px, -35px) scale(0.6);
+  -webkit-transform: translate(5px, -35px) scale(0.6);
+  transform: translate(5px, -35px) scale(0.6);
+}
+.menu-group {
+  background: deepskyblue;
+  padding-left: 10px;
+  vertical-align: middle;
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  color: white;
+  height: 45px;
+  cursor: pointer;
+  border-bottom: 0.5px solid #b8bcc0;
+}
+
+.menu-item {
+  background: #eceef0;
+  border-bottom: 1px solid #b8bcc0;
+  line-height: 20px;
+  font-family: 'Helvetica Neue",Helvetica,Arial,sans-serif';
+  width: 100%;
+  padding-left: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-right: 5px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+}
+label {
+  margin: 0px;
+  padding: 0px;
+}
+
+.nav-link {
+  padding: 0px;
+}
+/*
+.new-search {
+    border: 1px solid #B5C9D4;
+    padding: 6px 15px;
+    background: #ECF1F4;
+    width: 235px;
+    font-size: 12px;
+    color: #3E7EA0;
+    text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.4);
+    -moz-border-radius: 20px;
+    -webkit-border-radius: 20px;
+    border-radius: 20px;
+    box-shadow: 0px 1px 1px rgba(255, 255, 255, 0.2), 0px 1px 3px rgba(25, 62, 83, 0.1) inset, 0px 0px 0px 8px rgba(155, 180, 195, 0.3);
+}
+
+.new-search:focus {
+    outline: none;
+}
+
+#nav-search input {
+    width: 180px;
+    height: 20px;
+    padding: 4px 6px;
+    font-size: 14px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    background: none repeat scroll 0 0 #333333;
+    border: 1px solid #030303;
+    color: #ffffff;
+    -moz-box-shadow: 0 0 5px #666;
+    -webkit-box-shadow: 0 0 5px #666;
+    box-shadow: 0px 0px 5px #666;
+}*/

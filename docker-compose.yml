@@ -1,0 +1,19 @@
+version: '1'
+
+services:
+  angular-smartui:
+    environment:
+      - NODE_ENV=development
+      - PORT=80
+      - DB_AUTHENTICATE=false
+    build:
+      context: .
+      dockerfile: server.dockerfile
+    container_name: angular-smartui
+    ports:
+      - '9000:80'
+    networks:
+      - node-network
+networks:
+  node-network:
+    driver: bridge

@@ -1,0 +1,41 @@
+﻿<style>
+  .vertical-radio-group {
+    display: inline-flex;
+    flex-direction: column;
+  }
+
+  .radio-button {
+    padding: 5px 15px;
+  }
+</style>
+<div>
+  <label
+    *ngIf="control.label && control.label !== ''"
+    [attr.for]="control.key"
+    [ngStyle]="{ display: control.hideTextHeader === true ? 'None' : '' }"
+    >{{ control.label | translate }}
+    <span *ngIf="validator" style="color: red">*</span></label
+  >
+  <div [class]="control.classCss">
+    <mat-radio-group
+      class=" {{ control.showVertical ? 'vertical-radio-group' : '' }}"
+      [(ngModel)]="value"
+    >
+      <mat-radio-button
+        [disabled]="control.disabled"
+        class="radio-button"
+        *ngFor="let item of control['items']"
+        [value]="item.key"
+      >
+        {{ item.label | translate }}
+      </mat-radio-button>
+    </mat-radio-group>
+    <div
+      *ngIf="formErrors.errors"
+      class="errorBox"
+      style="position: relative; max-width: 230px"
+    >
+      <div *ngFor="let error of formErrors.errors">{{ error | translate }}</div>
+    </div>
+  </div>
+</div>

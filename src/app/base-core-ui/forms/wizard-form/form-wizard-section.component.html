@@ -1,0 +1,115 @@
+﻿<div class="form-detail-wizard">
+  <div class="row" style="padding-top: 10px">
+    <div class="col-12 w-100">
+      <ul class="steps top">
+        <li
+          *ngFor="let section of Sections; let indexOfSection = index"
+          class="step"
+          [class.step-active]="section.selected"
+          [class.step-success]="stepSuccess(section.sectionName)"
+          [class.step-error]="stepError(section.sectionName)"
+        >
+          <div class="step-content">
+            <button
+              class="step-circle"
+              (click)="clickSection(section)"
+              [disabled]="!section.isLoaded"
+            >
+              {{ indexOfSection + 1 }}
+            </button>
+            <span class="step-text text-center">{{
+              section.sectionName | translate
+            }}</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="topMenuAction" [hidden]="!ShowTopMenuAction">
+      <ul class="nav d-flex justify-content-end" style="margin-top: 10px">
+        <button
+          type="button"
+          class="btn btn-outline-primary ms-2 btn-action"
+          *ngFor="let primaryBtn of getActionButtons(PrimaryButtons)"
+          (click)="formAction(primaryBtn.ActionName)"
+          [hidden]="checkHideButton(primaryBtn.ActionName)"
+        >
+          {{ primaryBtn.buttonLabel | translate }}
+        </button>
+        <li
+          class="nav-item dropdown"
+          *ngIf="getActionButtons(MoreButtons).length > 0"
+        >
+          <button
+            type="button"
+            class="btn dropdown-toggle dropdown-toggle-split ms-2"
+            data-bs-toggle="dropdown"
+            aria-haspopup="false"
+            aria-expanded="false"
+          ></button>
+
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li *ngFor="let moreBtn of getActionButtons(MoreButtons)">
+              <a
+                class="dropdown-item"
+                (click)="formAction(moreBtn.ActionName)"
+                >{{ moreBtn.buttonLabel | translate }}</a
+              >
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <br />
+  <div class="row">
+    <div
+      *ngFor="let section of Sections"
+      [hidden]="!section.selected"
+      class="col-12 align-items-center"
+    >
+      <div class="wrapper">
+        <app-dynamic-component
+          [componentData]="section.sectionData"
+          (OnComponentActions)="
+            onFormGroupChangeEvent($event, section.sectionKey)
+          "
+        ></app-dynamic-component>
+      </div>
+    </div>
+  </div>
+  <div class="row bottom-action">
+    <div class="col-12">
+      <div class="container-fluid">
+        <div style="float: left">
+          <div
+            *ngIf="bottomLeftControl !== undefined"
+            class="form-inline {{ bottomLeftClass }}"
+            style="font-weight: bold; padding-top: 15px"
+          >
+            <div class="p-0">{{ bottomLeftControl.label | translate }}</div>
+            <div class="p-0" style="margin-left: 5px">
+              {{
+                bottomLeftControl["prefix"] ? bottomLeftControl["prefix"] : ""
+              }}
+              {{ bottomLeftControl.value }}
+              {{
+                bottomLeftControl["suffix"] ? bottomLeftControl["suffix"] : ""
+              }}
+            </div>
+          </div>
+        </div>
+        <div style="float: right">
+          <button
+            type="button"
+            class="btn btn-outline-primary ms-2 btn-action"
+            *ngFor="let primaryBtn of getBottomActionButtons(PrimaryButtons)"
+            (click)="formAction(primaryBtn.ActionName)"
+            [hidden]="checkHideButton(primaryBtn.ActionName)"
+          >
+            {{ primaryBtn.buttonLabel | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,56 @@
+<div class="w-100 form-inline" style="padding-bottom: 10px">
+  <div class="float-left">
+    <app-formc-search-dynamic
+      class="w-100"
+      [IsApply]="IsApply"
+      [controls]="controls"
+      (OnSubmit)="onSubmit($event)"
+    >
+    </app-formc-search-dynamic>
+  </div>
+  <div class="form-inline right-search-buttons">
+    <div *ngFor="let item of RightSearchButtonList">
+      <button class="btn {{ item.customClass }}" (click)="itemClicked(item)">
+        {{ item.buttonLabel | translate }}
+      </button>
+    </div>
+  </div>
+  <div class="form-inline right-form-buttons ms-auto">
+    <div *ngFor="let item of RightFormButtonList">
+      <div
+        *ngIf="
+          item.menuItems && item.menuItems.length > 0;
+          then menuButtons;
+          else normalButtons
+        "
+      ></div>
+      <ng-template #menuButtons>
+        <button
+          mat-button
+          [matMenuTriggerFor]="menu"
+          class="btn button-action {{ item.customClass }}"
+        >
+          {{ item.buttonLabel | translate }}
+        </button>
+        <mat-menu #menu="matMenu">
+          <button
+            mat-menu-item
+            *ngFor="let child of item.menuItems"
+            class="{{ child.customClass }}"
+            (click)="itemClicked(child)"
+          >
+            {{ child.buttonLabel | translate }}
+          </button>
+        </mat-menu>
+      </ng-template>
+      <ng-template #normalButtons>
+        <button
+          class="btn button-action {{ item.customClass }}"
+          (click)="itemClicked(item)"
+        >
+          {{ item.buttonLabel | translate }}
+        </button>
+      </ng-template>
+    </div>
+  </div>
+</div>

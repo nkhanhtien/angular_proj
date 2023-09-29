@@ -1,0 +1,19 @@
+﻿<div>
+  <span
+    class="material-icons close"
+    (click)="actionClick('n')"
+    title="{{ 'close' | translate }}"
+    style="cursor: pointer"
+  >
+  </span>
+  <h2 class="dialog-title" mat-dialog-title>{{ data.title }}</h2>
+  <mat-dialog-content>{{ data.message }}</mat-dialog-content>
+  <mat-dialog-actions align="end" class="mt-2">
+    <button
+      class="btn btn-outline-primary btn-close"
+      (click)="actionClick('y')"
+    >
+      {{ "close" | translate }}
+    </button>
+  </mat-dialog-actions>
+</div>

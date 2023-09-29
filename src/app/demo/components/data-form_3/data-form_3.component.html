@@ -1,0 +1,67 @@
+<div class="row">
+  <div class="col w-100 d-flex justify-content-center">
+    <h4 class="card-title">Step 3: Client's Info {{ index }}</h4>
+  </div>
+</div>
+<br />
+
+<div class="row" [hidden]="!isLoading && isShowClientDetails">
+  <div class="col w-100 d-flex justify-content-center">
+    <div class="list-group" id="list-tab" role="tablist">
+      <a
+        class="list-group-item list-group-item-action"
+        id="list-home-list"
+        data-bs-toggle="list"
+        (click)="selectClientOption('exist')"
+        role="tab"
+      >
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1">Existing Client</h5>
+        </div>
+        <small>Select Client from list</small>
+      </a>
+      <a
+        class="list-group-item list-group-item-action list-group-item-custom"
+        id="list-profile-list"
+        data-bs-toggle="list"
+        (click)="selectClientOption('new')"
+        role="tab"
+      >
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1">New Client</h5>
+        </div>
+        <small>Enter Client's info</small>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div [hidden]="!isLoading && !isShowClientDetails">
+  <div [hidden]="!isLoading && isNewClient">
+    <div class="row">
+      <div class="col w-100 d-flex justify-content-center">
+        <app-formc-single
+          #ChildForm1
+          [controls]="viewControls1"
+          (OnFormControlStatusChanges)="onFormControlStatusChanges($event)"
+        ></app-formc-single>
+      </div>
+    </div>
+    <div class="row" [hidden]="!isLoading && !isShowViewClient">
+      <div class="col w-100 d-flex justify-content-center">
+        <app-formc-view [controls]="viewControls2"></app-formc-view>
+      </div>
+    </div>
+  </div>
+  <div [hidden]="!isLoading && !isNewClient">
+    <div class="row">
+      <div class="col w-100 d-flex justify-content-center">
+        <app-formc-single
+          #ChildForm2
+          [controls]="viewControls3"
+          (OnFormControlStatusChanges)="onFormControlStatusChanges($event)"
+        ></app-formc-single>
+      </div>
+    </div>
+  </div>
+</div>

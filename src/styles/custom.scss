@@ -1,0 +1,115 @@
+.form-detail {
+  border-bottom: 25px solid #f5f6fa;
+  background-clip: padding-box;
+  min-height: calc(100vh - 55px);
+  margin: auto;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+.row-title {
+  padding: 9px 0px;
+  background-color: #f5f6fa;
+}
+
+.go-back-icon {
+  cursor: pointer;
+  float: left;
+  margin-top: 5px;
+  color: black;
+  margin-right: 10px;
+}
+
+.form-title {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 36px;
+  text-transform: capitalize;
+  color: black;
+  float: left;
+}
+
+.search-bar {
+  background-color: #f5f6fa;
+}
+
+.split-group-default {
+  background-color: #f5f6fa;
+  height: 10px;
+}
+
+.bottom-action {
+  padding-bottom: 10px;
+  margin-top: auto;
+  margin-left: auto;
+}
+
+.bottom-action.col {
+  background-color: white;
+}
+
+.group-control-title {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 21px;
+  padding-top: 10px;
+  text-transform: uppercase;
+  color: black;
+  margin-left: 20px !important;
+}
+
+.form-detail a {
+  font-size: 12px !important;
+  line-height: 18px;
+}
+
+.icon {
+  font-size: 24px;
+}
+
+/* Hide arrow button on input number control */
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input::-webkit-input-placeholder {
+  font-size: 12px;
+  line-height: 18px;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+/* End hide arrow button on input number control */
+
+.in-use-label {
+  font-weight: 600;
+  font-size: 0.75rem;
+  color: white;
+  padding: 3px 0px;
+  border-radius: 20px;
+  background-color: #00ca20;
+  float: right;
+  width: 80px;
+  margin-top: 6px;
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.unused-label {
+  background-color: #828282;
+}
+
+//tab
+.search-bar-tab {
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 10px;
+}

@@ -1,0 +1,41 @@
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-text-fill-color: black !important;
+  -moz-box-shadow: 0 0 0px 1000px white inset !important; /* Firefox */
+  -webkit-box-shadow: 0 0 0px 1000px white inset !important; /* Safari, Chrome */
+  box-shadow: 0 0 0px 1000px white inset !important;
+}
+
+.btn-action {
+  background-color: transparent;
+}
+
+.form-control-custom {
+  border-left: none !important;
+}
+
+.invalid-icon {
+  border: 1px solid #dc3545 !important;
+  border-right: none !important;
+}
+
+.focused-icon {
+  border: 1px solid #80bdff !important;
+  border-right: none !important;
+}
+
+.btn-outline-icon {
+  border: 1px solid #ced4da;
+  border-right: none;
+  width: 30px;
+}
+
+.input-group-prepend-icon .btn {
+  height: 40px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+}

@@ -1,0 +1,64 @@
+<div [ngStyle]="control.style || {}">
+  <label
+    *ngIf="control.label && control.label !== ''"
+    [attr.for]="control.key"
+    [ngStyle]="{ display: control.hideTextHeader === true ? 'None' : '' }"
+    >{{ control.label | translate }}
+    <span *ngIf="validator" style="color: red">*</span></label
+  >
+  <div [class]="control.classCss">
+    <div class="input-group mb-3" *ngIf="control['icon']; else notHaveIcon">
+      <div class="input-group-prepend-icon">
+        <div
+          [class.invalid-icon]="isInvalid"
+          class="btn btn-outline-icon"
+          [class.focused-icon]="isFocused && !isInvalid"
+        >
+          <img src="{{ control['icon'] }}" />
+        </div>
+      </div>
+      <input
+        type="text"
+        appTextNumber
+        [disabled]="control.disabled || false"
+        class="form-control form-control-custom"
+        [(ngModel)]="value"
+        [ngModelOptions]="{ updateOn: control.updateOn }"
+        (blur)="blurEvent()"
+        (focus)="focus()"
+        [class.is-invalid]="isInvalid"
+        (keypress)="handleKeyPress($event)"
+        placeholder="{{ control['placeholder'] | translate }}"
+        [number]="control['type'] === 'number'"
+        [numberDecimal]="control['numberDecimal']"
+        [attr.maxlength]="control['type'] === 'number' ? 16 : null"
+      />
+    </div>
+    <ng-template #notHaveIcon>
+      <div>
+        <input
+          type="text"
+          appTextNumber
+          [disabled]="control.disabled || false"
+          class="form-control"
+          [(ngModel)]="value"
+          [ngModelOptions]="{ updateOn: control.updateOn }"
+          (blur)="blurEvent()"
+          [class.is-invalid]="isInvalid"
+          (keypress)="handleKeyPress($event)"
+          placeholder="{{ control['placeholder'] | translate }}"
+          [number]="control['type'] === 'number'"
+          [numberDecimal]="control['numberDecimal']"
+          [attr.maxlength]="control['type'] === 'number' ? 16 : null"
+        />
+      </div>
+    </ng-template>
+    <div
+      *ngIf="formErrors.errors"
+      class="errorBox"
+      style="position: relative; max-width: 230px"
+    >
+      <div *ngFor="let error of formErrors.errors">{{ error | translate }}</div>
+    </div>
+  </div>
+</div>

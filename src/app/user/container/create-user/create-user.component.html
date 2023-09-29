@@ -1,0 +1,24 @@
+<app-ctr-loading-page *ngIf="loading"></app-ctr-loading-page>
+
+<div [hidden]="loading">
+    <h5 class="create-user__heading">
+        New {{ roleName }}
+    </h5>
+
+    <div class="create-user__wrapper">
+        <div class="create-user__avatar">
+            <img src="https://picsum.photos/200" alt="avatar" class="create-user__avatar-img">
+            <span>{{ fullName }}</span>
+            <!-- <span>Title</span> -->
+        </div>
+        <div class="create-user__info">
+            <app-formc-single
+                #CreateUserForm
+                [controls]="controls"
+                [ButtonList]="buttonList"
+                (OnFormActions)="actionButtonList($event)"
+                (change)="getFullName()"
+            ></app-formc-single>
+        </div>
+    </div>
+</div>

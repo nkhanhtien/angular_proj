@@ -1,0 +1,37 @@
+<app-ctr-loading-page *ngIf="loading"></app-ctr-loading-page>
+
+<div [hidden]="loading">
+    <h5 class="dataset-heading">Datasets</h5>
+
+    <mat-expansion-panel hideToggle class="filter-panel">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Dataset list
+            </mat-panel-title>
+            <mat-panel-description class="filter-panel__desc">
+                Filter Panel
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+    </mat-expansion-panel>
+
+    <div class="sort-panel">
+        <button mat-raised-button color="primary" (click)="onClickCreateButton()">New Dataset</button>
+
+        <!-- <mat-form-field>
+            <mat-label>Sort by</mat-label>
+            <mat-select (selectionChange)="onChangeSortPanel($event)">
+                <mat-option *ngFor="let sort of sortTypes" [value]="sort.value">
+                    {{sort.label}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field> -->
+    </div>
+    
+    <app-formc-master
+        [GridDefinitions]="gridDefinitions"
+        [DataSource]="dataSource"
+        [PageInfo]="pageInfo"
+        (OnPageSourceChanged)="onPageSourceChanged($event)"
+        (OnRowActions)="OnRowActions($event)"
+    ></app-formc-master>
+</div>

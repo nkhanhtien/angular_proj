@@ -1,0 +1,42 @@
+<div class="row">
+  <div class="col w-100 d-flex justify-content-center">
+    <h4 class="card-title">Step 1: Select a package {{ index }}</h4>
+  </div>
+</div>
+
+<br />
+
+<div class="row">
+  <div class="col w-100 d-flex justify-content-center">
+    <div class="list-group list-group-horizontal" id="list-tab" role="tablist">
+      <a
+        class="list-group-item list-group-item-action"
+        id="list-home-list"
+        data-bs-toggle="list"
+        (click)="selectPackage('service')"
+        role="tab"
+      >
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1">Service</h5>
+          <small>6 months</small>
+        </div>
+        <p class="mb-1">Service Package Description.</p>
+        <small>Pay: 1000$</small>
+      </a>
+      <a
+        class="list-group-item list-group-item-action list-group-item-custom"
+        id="list-profile-list"
+        data-bs-toggle="list"
+        (click)="selectPackage('implement')"
+        role="tab"
+      >
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1">Implementation</h5>
+          <small>3 months</small>
+        </div>
+        <p class="mb-1">Implementation Package Description.</p>
+        <small>Pay: 800$</small>
+      </a>
+    </div>
+  </div>
+</div>

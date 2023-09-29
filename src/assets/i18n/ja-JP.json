@@ -1,0 +1,114 @@
+{
+  "language": {
+    "languages": "言語",
+    "en-US": "English",
+    "ja-JP": "日本人"
+  },
+  "auth": {
+    "login-form": {
+      "title": "アカウントにサインイン",
+      "email": "Eメール",
+      "password": "パスワード",
+      "login": "ログインする",
+      "forgot-password": "パスワードをお忘れですか？",
+      "donot-have-an-account": "アカウントを持っていないのですか？",
+      "register": "ここに登録",
+      "enter-your-email": "メールアドレスを入力",
+      "enter-your-password": "パスワードを入力してください"
+    },
+    "general": {
+      "logout": "ログアウト",
+      "user-profile": "ユーザープロファイル",
+      "settings": "設定"
+    },
+    "error": {
+      "incorrect-email-or-password": "入力したメールアドレスまたはパスワードが正しくありません",
+      "login-failed": "ログインに失敗しました",
+      "email-required": "メールは必須です",
+      "email-format": "間違ったメールフォーマット",
+      "password-required": "パスワードが必要"
+    }
+  },
+  "dashboard": {
+    "dashboard-container": {
+      "test": "ダッシュボードコンテナーの動作!",
+      "create-payment": "支払いを作成する",
+      "dashboard": "ダッシュボード",
+      "demo-management": "グループ管理"
+    }
+  },
+  "demo": {
+    "demo1": "デモ1",
+    "demo1.first-name": "ファーストネーム",
+    "demo2": "デモ2",
+    "demo3": "デモ3",
+    "demo3-step2": "ポリシー",
+    "demo3-success": "ウィザードが正常に作成されました!",
+    "demo3-create-other": "他を作成する",
+    "demo3-go-back": "戻る",
+    "search-title": "検索フォーム",
+    "dynamic-form-title": "コントロールをフォームに動的に追加する",
+    "user-name": "ユーザー名"
+  },
+  "form-master": {
+    "no-data": "データなし",
+    "emptyformtext": "結果を表示するには、別の基準/フィルターを選択してください"
+  },
+  "validate-control": {
+    "validate-minlength": "名前は4profile.job-title文字以上にする必要があります",
+    "validate-maxlength": "名前は24文字を超えることはできません",
+    "validate-email": "メールは必須です"
+  },
+  "paginator": {
+    "items_per_page": "表示",
+    "next_page": "次のページ",
+    "previous_page": "前のページ",
+    "first_page": "一ページ目",
+    "last_page": "最後のページ",
+    "of": "の"
+  },
+  "controls": {
+    "other-selected": "（および他の1つ）",
+    "others-selected": "（および{{number}}その他）"
+  },
+  "searching": "検索中...",
+  "search": "探す",
+  "reset": "リセット",
+  "searchMore": "もっと検索",
+  "select": "選択する",
+  "confirmation": "確認",
+  "confirm": "確認",
+  "move": "移動",
+  "name": "名前",
+  "email": "Eメール",
+  "action": "行動",
+  "view": "見る",
+  "edit": "編集",
+  "cancel": "キャンセル",
+  "save": "セーブ",
+  "delete": "削除",
+  "enable": "有効",
+  "disable": "無効",
+  "enabled": "有効",
+  "disabled": "無効",
+  "close": "閉じる",
+  "from": "から",
+  "to": "に",
+  "item-selected": "選択したアイテム",
+  "items-selected": "選択したアイテム",
+  "error": "エラー",
+  "warning": "警告",
+  "information": "情報",
+  "general": "一般",
+  "show": "公演",
+  "hide": "隠す",
+  "next": "次",
+  "previous": "前",
+  "finish": "終了",
+  "back": "バック",
+  "submit": "参加する",
+  "renew": "更新",
+  "change": "変化する",
+  "apply": "適用する",
+  "all": "すべて"
+}

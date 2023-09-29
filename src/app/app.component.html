@@ -1,0 +1,164 @@
+<div *ngIf="isLogin; then Auth; else noAuth"></div>
+<ng-template #Auth>
+  <app-ctr-menu
+    [menu]="menu"
+    (OnShowMenu)="onShowedMenu()"
+    (OnHideMenu)="onHidedMenu()"
+  ></app-ctr-menu>
+
+  <div class="page-content">
+    <div class="header-top-menu" [style.width]="headerTopMenuWidth">
+      <nav class="navbar navbar-expand-lg nav-header">
+        <div class="top-menu" [style.paddingLeft]="isShowMenu ? '1rem' : '4rem'">Top Menu</div>
+        <div class="ms-auto">
+          <ul class="breadcrumb_custom">
+            <li *ngFor="let item of breadcrumb">
+              <span *ngIf="item.url && item.url !== ''">
+                <a
+                  ref="javascript:void(0);"
+                  (click)="breadcrumbNavigate(item.url)"
+                  class="hand-cursor"
+                  >{{ item.label }}</a
+                >
+              </span>
+              <span *ngIf="item.url === null">{{ item.label }}</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="navbar-text">
+          <ul class="nav d-flex justify-content-end">
+            <span
+              *ngIf="hasMessages()"
+              class="notification material-icons"
+              style="cursor: pointer"
+              [ngStyle]="{ color: messageService.ColorMessage }"
+              (click)="showOrHideMessage()"
+            >
+              error_outline
+            </span>
+            <mat-icon class="notification">notifications</mat-icon>
+            <img
+              class="image"
+              src="{{ userAvatarLink || './assets/img/avatar.jpeg' }}"
+              alt="avatar"
+              (error)="userAvatarLink = './assets/img/avatar.jpeg'"
+            />
+            <div class="userInfo">
+              <div class="userDisplay">{{ getUserDisplay() }}</div>
+              <div class="userRole">{{ roleDisplayName }}</div>
+            </div>
+            <li class="nav-item dropdown">
+              <button
+                type="button"
+                class="btn dropdown-toggle dropdown-toggle-split"
+                style="width: 25px"
+                data-bs-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                <span class="sr-only">Toggle Dropdown</span>
+              </button>
+
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li>
+                  <a
+                    class="dropdown-item"
+                    (click)="showUserSetting()"
+                    style="cursor: pointer"
+                    >User Profile</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    (click)="showUserSetting()"
+                    style="cursor: pointer"
+                    >{{ "auth.general.settings" | translate }}</a
+                  >
+                </li>
+                <div class="dropdown-divider"></div>
+                <li>
+                  <a
+                    class="dropdown-item dropdown-toggle"
+                    href="javascript:void(0)"
+                  >
+                    {{ "language.languages" | translate }}
+                  </a>
+                  <ul class="submenu submenu-left dropdown-menu">
+                    <li *ngFor="let lang of languages">
+                      <a
+                        class="dropdown-item langItem"
+                        style="cursor: pointer"
+                        (click)="changeLanguage(lang)"
+                        >{{ getLanguageDisplay(lang, true) }}</a
+                      >
+                    </li>
+                  </ul>
+                </li>
+                <div class="dropdown-divider"></div>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    (click)="logout()"
+                    style="cursor: pointer"
+                    >{{ "auth.general.logout" | translate }}</a
+                  >
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <div *ngIf="hasMessages() && showMessage" class="message-info">
+        <div *ngFor="let msg of messageService.AllMessages">
+          <div
+            class="alert alert-dismissible fade show alert-custom"
+            [class.alert-danger]="messageService.isErrorAlert(msg.type)"
+            [class.alert-warning]="messageService.isWarningAlert(msg.type)"
+            [class.alert-info]="messageService.isInfoAlert(msg.type)"
+            [class.alert-secondary]="messageService.isOtherAlert(msg.type)"
+          >
+            <strong
+              >{{
+                messageService.getMessageTypeText(msg.type) | translate
+              }}!</strong
+            >
+            {{ msg.text | translate }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid" style="padding-top: 55px">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #noAuth>
+  <div class="header-top-menu-no-auth">
+    <ul class="nav justify-content-end">
+      <li class="nav-item dropdown">
+        <a
+          class="nav-link dropdown-toggle"
+          data-bs-toggle="dropdown"
+          href="#"
+          role="button"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          {{ getLanguageDisplay(currentLanguage, false) }}</a
+        >
+        <div class="dropdown-menu">
+          <a
+            class="dropdown-item"
+            *ngFor="let lang of languages"
+            (click)="changeLanguage(lang)"
+            >{{ getLanguageDisplay(lang, true) }}</a
+          >
+        </div>
+      </li>
+    </ul>
+  </div>
+  <router-outlet></router-outlet>
+</ng-template>

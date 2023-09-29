@@ -1,0 +1,41 @@
+<input type="hidden" [value]="searchItem.columnDef" />
+<div>
+  <mat-form-field>
+    <!--<input type="date" matInput placeholder="From Date ..." [(ngModel)]="searchItem.fromDate">-->
+    <input
+      matInput
+      placeholder="From Date ..."
+      [matDatepicker]="fromDatepicker"
+      [(ngModel)]="searchItem.fromDate"
+    />
+    <mat-datepicker-toggle
+      matSuffix
+      [for]="fromDatepicker"
+    ></mat-datepicker-toggle>
+    <mat-datepicker #fromDatepicker></mat-datepicker>
+  </mat-form-field>
+</div>
+<div>
+  <mat-form-field>
+    <!--<input type="date" matInput placeholder="To Date ..." [(ngModel)]="searchItem.toDate">-->
+    <input
+      matInput
+      placeholder="To Date ..."
+      [matDatepicker]="toDatepicker"
+      [(ngModel)]="searchItem.toDate"
+    />
+    <mat-datepicker-toggle
+      matSuffix
+      [for]="toDatepicker"
+    ></mat-datepicker-toggle>
+    <mat-datepicker #toDatepicker></mat-datepicker>
+  </mat-form-field>
+</div>
+<div>
+  <button mat-button (click)="menuSeachAction({ action: 'close' })">
+    Cancel
+  </button>
+  <button mat-button (click)="menuSeachAction({ action: 'search' })">
+    Search
+  </button>
+</div>

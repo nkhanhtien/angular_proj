@@ -1,0 +1,44 @@
+﻿<div [ngStyle]="control.style">
+  <label
+    *ngIf="control.label && control.label !== ''"
+    [attr.for]="control.key"
+    [ngStyle]="{ display: control.hideTextHeader === true ? 'None' : '' }"
+    >{{ control.label | translate }}
+    <span *ngIf="validator" style="color: red">*</span></label
+  >
+  <div [class]="control.classCss">
+    <div>
+      <input
+        type="text"
+        [disabled]="control.disabled || false"
+        class="form-control"
+        [(ngModel)]="value"
+        [ngModelOptions]="{ updateOn: control.updateOn }"
+        [type]="control['type']"
+        [patterns]="control['patterns']"
+        mask="{{ control['mask'] }}"
+        suffix="{{ control['suffix'] }}"
+        [showMaskTyped]="control['showMaskTyped']"
+        placeHolderCharacter="{{ control['placeholder'] | translate }}"
+        prefix="{{ control['prefix'] | translate }}"
+        [dropSpecialCharacters]="control['dropSpecialCharacters']"
+        (blur)="blurEvent()"
+        [class.is-invalid]="formControl?.invalid && formControl?.touched"
+        [specialCharacters]="control['specialCharacters']"
+        [allowNegativeNumbers]="control['allowNegativeNumbers']"
+        [thousandSeparator]="control['thousandSeparator']"
+        [separatorLimit]="control['separatorLimit']"
+        [hiddenInput]="control['hiddenInput']"
+        [leadZeroDateTime]="control['leadZeroDateTime']"
+        [validation]="control['validation']"
+      />
+    </div>
+    <div
+      *ngIf="formErrors.errors"
+      class="errorBox"
+      style="position: relative; max-width: 230px"
+    >
+      <div *ngFor="let error of formErrors.errors">{{ error | translate }}</div>
+    </div>
+  </div>
+</div>

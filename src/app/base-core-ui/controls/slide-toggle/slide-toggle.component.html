@@ -1,0 +1,41 @@
+﻿<style>
+  .vertical-slide-toggle {
+    display: inline-flex;
+  }
+</style>
+<div *ngIf="control.showVertical">
+  <label
+    *ngIf="control.label && control.label !== ''"
+    [attr.for]="control.key"
+    [ngStyle]="{ display: control.hideTextHeader === true ? 'None' : '' }"
+    >{{ control.label | translate }}
+    <span *ngIf="validator" style="color: red">*</span></label
+  >
+  <div [class]="control.classCss">
+    <mat-slide-toggle
+      [disabled]="control.disabled || false"
+      [(ngModel)]="value"
+    ></mat-slide-toggle>
+    <label
+      *ngIf="value && control['labelTrue'] && control['labelTrue'] !== ''"
+      style="margin-left: 10px"
+      >{{ control["labelTrue"] | translate }}</label
+    >
+    <label
+      *ngIf="!value && control['labelFalse'] && control['labelFalse'] !== ''"
+      style="margin-left: 10px"
+      >{{ control["labelFalse"] | translate }}</label
+    >
+  </div>
+</div>
+<ng-template #notShowVertical>
+  <div class="vertical-slide-toggle">
+    <div [class]="control.classCss">
+      <mat-slide-toggle
+        [disabled]="control.disabled || false"
+        [(ngModel)]="value"
+        >{{ control.label | translate }}</mat-slide-toggle
+      >
+    </div>
+  </div>
+</ng-template>

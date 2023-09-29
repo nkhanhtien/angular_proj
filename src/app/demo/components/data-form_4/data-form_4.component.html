@@ -1,0 +1,20 @@
+<div class="row">
+  <div class="col w-100 d-flex justify-content-center">
+    <h4 class="card-title">Step 1: Select a package {{ index }}</h4>
+  </div>
+</div>
+<br />
+
+<div class="row">
+  <div class="col w-100 d-flex justify-content-center">
+    <div class="col col-xl-4 col-lg-4 col-md-4 col-sm-12">
+      <app-formc-view #ChildForm1 [controls]="viewControls1"></app-formc-view>
+    </div>
+    <div class="col col-xl-4 col-lg-4 col-md-4 col-sm-12">
+      <app-formc-view #ChildForm2 [controls]="viewControls2"></app-formc-view>
+    </div>
+    <div class="col col-xl-4 col-lg-4 col-md-4 col-sm-12">
+      <app-formc-view #ChildForm3 [controls]="viewControls3"></app-formc-view>
+    </div>
+  </div>
+</div>
