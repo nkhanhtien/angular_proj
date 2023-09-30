@@ -1,10 +1,4 @@
-# be sure you have an up and running docker swarm cluster (1 node or more):
-docker swarm init
-# store your API keys using docker secret manager:
-echo AccessID | docker secret create sumo-access-id
-echo AccessKey | docker secret ceate sumo-access-key
-
-version: '1'
+version: '3.9'
 
 services:
   angular-smartui:
@@ -21,24 +15,6 @@ services:
     networks:
       - node-network
 
-  sumologic:
-    image: sumologic/collector:latest
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-    deploy:
-      mode: global
-    secrets:
-      - suP5loBcWjCjG0
-      - QcNUEAQo8j8mKQjC23xMbui6MczPum3a76vAyXidNukQWgBvJ6zNTZWe6muaLcwV
-    environment:
-      SUMO_ACCESS_ID_FILE: /run/secrets/sumo-access-id
-      SUMO_ACCESS_KEY_FILE: /run/secrets/sumo-access-key
-
-secrets:
-sumo-access-id:
-  external: true
-sumo-access-key:
-  external: true
 networks:
   node-network:
     driver: bridge
