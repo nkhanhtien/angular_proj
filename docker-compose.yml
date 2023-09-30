@@ -28,17 +28,17 @@ services:
     deploy:
       mode: global
     secrets:
-      - suP5loBcWjCjG0
-      - QcNUEAQo8j8mKQjC23xMbui6MczPum3a76vAyXidNukQWgBvJ6zNTZWe6muaLcwV
+      - sumo-access-id
+      - sumo-access-key
     environment:
       SUMO_ACCESS_ID_FILE: /run/secrets/sumo-access-id
       SUMO_ACCESS_KEY_FILE: /run/secrets/sumo-access-key
 
 secrets:
-sumo-access-id:
-  external: true
-sumo-access-key:
-  external: true
+  sumo-access-id:
+    external: true
+  sumo-access-key:
+    external: true
 networks:
   node-network:
     driver: bridge
