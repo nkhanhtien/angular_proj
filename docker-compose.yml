@@ -1,19 +1,34 @@
-version: '1'
-
+version: '2'
 services:
-  angular-smartui:
-    environment:
-      - NODE_ENV=development
-      - PORT=80
-      - DB_AUTHENTICATE=false
-    build:
-      context: .
-      dockerfile: server.dockerfile
-    container_name: angular-smartui
-    ports:
-      - '9000:80'
-    networks:
-      - node-network
-networks:
-  node-network:
-    driver: bridge
+ angular-app:
+ # Folder containing the Dockerfile to build the NodeJS app
+ build:
+    context: .
+    dockerfile: Dockerfile
+  container_name: angular-app
+ ports: 
+  - '9000:80'
+ volumes:
+  # Create a mapping between host and container to write log files
+  — /var/log/container-logs:/var/log/container-logs
+ links:
+  — 'sumodocker'
+ # configure the nodejsapp container to log any syslog to sumologic collector locally (available since we linked this container witht he sumodocker one)
+ logging:
+  driver: syslog
+  options:
+  # TODO use a wildcard address or DOCKER_HOST
+  syslog-address: 'tcp://localhost:514'
+sumodocker:
+ # Folder containing Dockerfile to build the sumologic collector    image
+ build: ./sumodocker
+ ports:
+  — '514:514'
+ volumes:
+  # Create a mapping between host and container to read log files
+  — /var/log/container-logs:/var/log/container-logs
+ environment:
+  SUMO_ACCESS_ID: 'survbyERaP1qQr'
+  SUMO_ACCESS_KEY: 'a2QKoMrumow0qCdhSsk3qqA3rD0UG6BtRHtCYLQgqPTZvjjgZIAv3OUbnDBqYt3W'
+  SUMO_COLLECTOR_NAME: 'angularapp-collector'
+  SUMO_SOURCES_JSON: '/etc/sumo-sources.json'
