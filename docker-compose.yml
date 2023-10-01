@@ -3,9 +3,9 @@ services:
  angular-app:
  # Folder containing the Dockerfile to build the NodeJS app
  build:
-    context: .
+    context:
     dockerfile: Dockerfile
-  container_name: angular-app
+ container_name: angular-app
  ports: 
   - '9000:80'
  volumes:
