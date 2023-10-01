@@ -5,7 +5,6 @@ services:
  build:
     context:
     dockerfile: Dockerfile
- container_name: angular-app
  ports: 
   - '9000:80'
  volumes:
