@@ -9,7 +9,6 @@ import {
 } from './../base-core-ui/app.core.shared.interfaces';
 import { AppConfigService } from './app-config.service';
 import { ParamRequestSearchType } from '../base-core-ui/app.core.shared.enums';
-import "./tracer";
 
 @Injectable()
 export class AppBaseService {
