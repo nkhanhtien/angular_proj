@@ -1,41 +1,14 @@
-version: '1'
-
+version: '2'
 services:
   angular-smartui:
-    environment:
-      - NODE_ENV=development
-      - PORT=80
-      - DB_AUTHENTICATE=false
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: angular-smartui
     ports:
       - '9000:80'
-    networks:
-      - node-network
     volumes:
-          - '/var/log/container-logs:/var/log/container-logs'
+      - '/var/log/container-logs:/var/log/container-logs'
     logging:
       driver: syslog
       options:
         syslog-address: 'tcp://localhost:514'
-
-  sumodocker:
-    build:
-      context: ./sumodocker
-    ports:
-      - '514:514'
-    volumes:
-      - '/var/log/container-logs:/var/log/container-logs'
-    environment:
-      SUMO_ACCESS_ID: 'survbyERaP1qQr'
-      SUMO_ACCESS_KEY: 'a2QKoMrumow0qCdhSsk3qqA3rD0UG6BtRHtCYLQgqPTZvjjgZIAv3OUbnDBqYt3W'
-      SUMO_COLLECTOR_NAME: 'angularapp-collector'
-      SUMO_SOURCES_JSON: '/etc/sumo-sources.json'
-    networks:
-      - node-network
-
-networks:
-  node-network:
-    driver: bridge
