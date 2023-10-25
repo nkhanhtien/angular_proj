@@ -6,8 +6,8 @@ on:
 
 env:
   applicationfolder: flink-app-aws
-  AWS_REGION: ##region##
-  S3BUCKET: ##s3-bucket## 
+  AWS_REGION: us-east-1
+  S3BUCKET: flink-source 
 
 
 jobs:
